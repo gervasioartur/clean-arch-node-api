@@ -7,8 +7,8 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "start": "node dist/main/api",
-    "test": "jest",
-    "test:staged": "jest"
+    "test": "jest --passWithNoTests --watch",
+    "test:staged": "jest --pasWithNoTests"
   },
   "engines": {
     "node": "16.x"
