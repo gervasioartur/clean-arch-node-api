@@ -1,8 +1,6 @@
+import {EmailValidator, AddAccount, AccountModel, AddAccountModel } from '../Singup/singup-protocols'
 import { SingUpController } from './SingUp'
-import { MissingParamError, InvalidParamError, ServerError } from '../errors'
-import { EmailValidator } from '../protocols/'
-import { AccountModel } from '../../domain/models/Account'
-import { AddAccount, AddAccountModel } from '@/domain/useCases/add-account'
+import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
 
 const makeEmailValidator = (): EmailValidator => {
     class EmailValidatorStub implements EmailValidator {
@@ -22,7 +20,7 @@ const makeEmailValidatorWithError = (): EmailValidator => {
     return new EmailValidatorStub()
 }
 
-const makeaddAccount= (): AddAccount => {
+const makeaddAccount = (): AddAccount => {
     class AddAccountStub implements AddAccount {
         add(account: AddAccountModel): AccountModel {
             const fakeAccount = {
@@ -125,7 +123,6 @@ describe('Sing up controller', () => {
         expect(httpResponse.statusCode).toBe(400)
         expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'))
     })
-
 
     it('should retun 400 if the email invalid', () => {
         const { sut, emailValidatorStub } = makeSut()

@@ -1,8 +1,6 @@
-import { AddAccount } from '@/domain/useCases/add-account'
-import { request } from 'http'
-import { MissingParamError, InvalidParamError } from '../errors'
-import { badRequest, serverError } from '../helpers/http-helper'
-import { Controller, EmailValidator, HttpRequest, HttpResponse } from '../protocols'
+import { Controller, HttpRequest, HttpResponse, EmailValidator, AddAccount } from './singup-protocols'
+import { MissingParamError, InvalidParamError } from '../../errors'
+import { badRequest, serverError } from '../../helpers/http-helper'
 
 export class SingUpController implements Controller {
     constructor(
@@ -28,7 +26,7 @@ export class SingUpController implements Controller {
             if (!isValid) {
                 return badRequest(new InvalidParamError('email'))
             }
-            
+
             this.addAccount.add({
                 name,
                 email,
