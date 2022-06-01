@@ -1,4 +1,4 @@
-import {EmailValidator, AddAccount, AccountModel, AddAccountModel } from '../Singup/singup-protocols'
+import { EmailValidator, AddAccount, AccountModel, AddAccountModel } from '../Singup/singup-protocols'
 import { SingUpController } from './SingUp'
 import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
 
@@ -57,7 +57,7 @@ describe('Sing up controller', () => {
         const { sut } = makeSut()
         const httpRequest = {
             body: {
-                email: 'any_email@email.com',
+                email: 'valid_email@email.com',
                 password: 'any_password',
                 passwordConfirmation: 'any_password'
             }
@@ -191,6 +191,44 @@ describe('Sing up controller', () => {
             name: "any_name",
             email: 'any_email@email.com',
             password: 'any_password',
+        })
+    })
+
+    it('should retun 500 if  addAcount throws', () => {
+        const { sut, addAccountStub } = makeSut()
+        jest.spyOn(addAccountStub, 'add').mockImplementationOnce(() => {
+            throw new Error()
+        })
+        const httpRequest = {
+            body: {
+                name: "any_name",
+                email: 'any_email@email.com',
+                password: 'any_password',
+                passwordConfirmation: 'any_password'
+            }
+        }
+        const httpResponse = sut.handle(httpRequest)
+        expect(httpResponse.statusCode).toBe(500)
+        expect(httpResponse.body).toEqual(new ServerError())
+    })
+
+    it('should retun 200 if valid data is provided', () => {
+        const { sut } = makeSut()
+        const httpRequest = {
+            body: {
+                name: "valid_name",
+                email: 'valid_email@email.com',
+                password: 'valid_password',
+                passwordConfirmation: 'valid_password'
+            }
+        }
+        const httpResponse = sut.handle(httpRequest)
+        expect(httpResponse.statusCode).toBe(200)
+        expect(httpResponse.body).toEqual({
+            id: 'valid_id',
+            name: 'valid_name',
+            email: 'valid_email',
+            password: 'valid_password'
         })
     })
 })
