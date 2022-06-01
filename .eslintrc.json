@@ -5,8 +5,5 @@
     },
     "rules": {
         "@typescript-eslint/strict-boolean-expressions": "off",
-        "@typescript-eslint/indent": "off",
-        "@typescript-eslint/quotes": "off",
-        "eol-last": "off"
     }
 }
