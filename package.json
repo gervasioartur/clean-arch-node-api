@@ -32,10 +32,12 @@
     "jest": "^28.1.0",
     "lint-staged": "^12.5.0",
     "ts-jest": "^28.0.3",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.2",
+    "v": "types/validator"
   },
   "dependencies": {
     "module-alias": "^2.2.2",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "validator": "^13.7.0"
   }
 }
