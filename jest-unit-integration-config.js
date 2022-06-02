@@ -1,3 +1,11 @@
-const config = require('./jest.config')
-config.testMatch = ['**/*.spec.ts']
-module.exports = config
+module.exports = {
+    roots: ['<rootDir>/src'],
+    collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+    coverageDirectory: 'coverage',
+    coverageProvider: 'babel',
+    testEnvironment: 'node',
+    testMatch: ['**/*.spec.ts'],
+    transform: {
+        '.+\\.ts$': 'ts-jest'
+    },
+}

@@ -9,10 +9,10 @@
     "start": "node dist/main/api",
     "test": "jest --passWithNoTests --watch --silent --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
-    "test:unit": "yarn test -- --watch -c jest-unit-config.js",
-    "test:integration": "yarn test -- --watch -c jest-unit-integration-config.js",
-    "test:staged": "yarn test -- --findRelatedTests",
-    "test:ci": "yarn test -- --coverage"
+    "test:unit": "jest --passWithNoTests --watch --silent --runInBand",
+    "test:integration": "jest --passWithNoTests --watch --silent --runInBand",
+    "test:staged": "jest --passWithNoTests --watch --silent --runInBand",
+    "test:ci": "jest --passWithNoTests --watch --silent --runInBand --coverage"
   },
   "engines": {
     "node": "16.x"

@@ -1,4 +1,4 @@
-import { AccountModel, AddAccountModel, AddAccountRepository, Encrypter } from "./db-add-account-protocols"
+import { AccountModel, AddAccountModel, AddAccountRepository, Encrypter } from "."
 import { DbAddAccount } from "./db-add-acount"
 
 const makeEncrypter = (): Encrypter => {
@@ -56,17 +56,17 @@ describe('DbAddAccount UseCase', () => {
     })
 
     //test ignorado
-    // it('should throw if encrypter throws', async () => {
-    //     const { sut, encryptStub } = makeSut()
-    //     jest.spyOn(encryptStub, 'encrypt').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
-    //     const accountData = {
-    //         name: 'valid_name',
-    //         email: 'valid_email',
-    //         password: 'valid_password'
-    //     }
-    //     const promise = sut.add(accountData)
-    //     await expect(promise).rejects.toThrow()
-    // })
+    it('should throw if encrypter throws', async () => {
+        const { sut, encryptStub } = makeSut()
+        jest.spyOn(encryptStub, 'encrypt').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+        const accountData = {
+            name: 'valid_name',
+            email: 'valid_email',
+            password: 'valid_password'
+        }
+        const promise = sut.add(accountData)
+        await expect(promise).rejects.toThrow()
+    })
 
     it('should call AddAccountRepository with correct values', async () => {
         const { sut, addAccountRepositoryStub } = makeSut()
