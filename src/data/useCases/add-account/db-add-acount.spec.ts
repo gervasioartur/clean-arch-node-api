@@ -1,5 +1,6 @@
-import { Encrypter } from "@/data/protocol/encrypter"
+import { Encrypter } from "./db-add-account-protocols"
 import { DbAddAccount } from "./db-add-acount"
+
 interface SuTypes {
     sut: DbAddAccount
     encryptStub: Encrypter
@@ -29,10 +30,24 @@ describe('DbAddAccount UseCase', () => {
         const encryptSpy = jest.spyOn(encryptStub, 'encrypt')
         const accountData = {
             name: 'valid_name',
-            email: 'valid_emai',
-            password: 'valid_passwordI'
+            email: 'valid_email',
+            password: 'valid_password'
         }
         await sut.add(accountData)
-        expect(encryptSpy).toHaveBeenCalledWith('valid_passwordI')
+        expect(encryptSpy).toHaveBeenCalledWith('valid_password')
     })
+
+    //test ignorado
+    // it('should throw if encrypter throws', async () => {
+    //     const { sut, encryptStub } = makeSut()
+    //     jest.spyOn(encryptStub, 'encrypt').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    //     const accountData = {
+    //         name: 'valid_name',
+    //         email: 'valid_email',
+    //         password: 'valid_password'
+    //     }
+    //     const promise = await sut.add(accountData)
+    //     await expect(promise).rejects.toThrow()
+    // })
+
 }) 
