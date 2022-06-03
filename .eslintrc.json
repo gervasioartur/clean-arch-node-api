@@ -12,11 +12,7 @@
         "@typescript-eslint/restrict-template-expressions": "off",
         "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/no-namespace": "off",
-        "@typescript-eslint/no-unused-vars": "off",
-        "node/handle-callback-err": "off",
         "@typescript-eslint/method-signature-style": "off",
-        "@typescript-eslint/no-unused-expressions": "off",
-        "@typescript-eslint/indent": "off",
         "@typescript-eslint/semi": "off",
         "no-trailing-spaces": "off",
         "t@typescript-eslint/space-before-function-paren": "off",
@@ -24,6 +20,11 @@
         "eol-last": "off",
         "@typescript-eslint/parser": "off",
         "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-expressions": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "node/handle-callback-err": "off",
+        " @typescript-eslint/no-unused-expressions": "off",
+        "@typescript-eslint/indent": "off",
         "import/export": "off"
     }
 }
