@@ -3,7 +3,7 @@ import { DbAddAccount } from "./db-add-acount"
 
 const makeEncrypter = (): Encrypter => {
     class EncryptStub implements Encrypter {
-        async encrypt(value: string): Promise<string> {
+        async encrypt (value: string): Promise<string> {
             return new Promise(resolve => resolve('hashed_password'))
         }
     }
@@ -12,7 +12,7 @@ const makeEncrypter = (): Encrypter => {
 
 const makeAddAccountRepository = (): AddAccountRepository => {
     class AddAccountRepositoryStub implements AddAccountRepository {
-        async add(accountData: AddAccountModel): Promise<AccountModel> {
+        async add (accountData: AddAccountModel): Promise<AccountModel> {
             const fakeAccount = {
                 id: 'valid_id',
                 name: 'valid_name',
@@ -55,7 +55,7 @@ describe('DbAddAccount UseCase', () => {
         expect(encryptSpy).toHaveBeenCalledWith('valid_password')
     })
 
-    //test ignorado
+    // test ignorado
     it('should throw if encrypter throws', async () => {
         const { sut, encryptStub } = makeSut()
         jest.spyOn(encryptStub, 'encrypt').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
@@ -85,7 +85,7 @@ describe('DbAddAccount UseCase', () => {
     })
 
     it('should return asn account on success', async () => {
-        const { sut, } = makeSut()
+        const { sut } = makeSut()
         const accountData = {
             name: 'valid_name',
             email: 'valid_email',
@@ -99,4 +99,4 @@ describe('DbAddAccount UseCase', () => {
             password: 'hashed_password'
         })
     })
-}) 
+})

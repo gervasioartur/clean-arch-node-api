@@ -3,14 +3,15 @@ import { MissingParamError, InvalidParamError } from '../../errors/'
 import { badRequest, serverError, ok } from '../../helpers/http-helper'
 
 export class SingUpController implements Controller {
-    constructor(
+    constructor (
         private readonly emailValidator: EmailValidator,
         private readonly addAccount: AddAccount
     ) {
         this.emailValidator = emailValidator
         this.addAccount = addAccount
     }
-    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+
+    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
             const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
             for (const field of requiredFields) {

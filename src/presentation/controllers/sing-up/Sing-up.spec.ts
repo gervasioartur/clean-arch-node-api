@@ -4,7 +4,7 @@ import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
 
 const makeEmailValidator = (): EmailValidator => {
     class EmailValidatorStub implements EmailValidator {
-        isValid(email: string): boolean {
+        isValid (email: string): boolean {
             return true
         }
     }
@@ -13,7 +13,7 @@ const makeEmailValidator = (): EmailValidator => {
 
 const makeEmailValidatorWithError = (): EmailValidator => {
     class EmailValidatorStub implements EmailValidator {
-        isValid(email: string): boolean {
+        isValid (email: string): boolean {
             throw new Error()
         }
     }
@@ -22,7 +22,7 @@ const makeEmailValidatorWithError = (): EmailValidator => {
 
 const makeaddAccount = (): AddAccount => {
     class AddAccountStub implements AddAccount {
-        async add(account: AddAccountModel): Promise<AccountModel> {
+        async add (account: AddAccountModel): Promise<AccountModel> {
             const fakeAccount = {
                 id: 'valid_id',
                 name: 'valid_name',
@@ -35,8 +35,8 @@ const makeaddAccount = (): AddAccount => {
     return new AddAccountStub()
 }
 interface SutTypes {
-    sut: SingUpController,
-    emailValidatorStub: EmailValidator,
+    sut: SingUpController
+    emailValidatorStub: EmailValidator
     addAccountStub: AddAccount
 }
 
@@ -50,7 +50,6 @@ const makeSut = (): SutTypes => {
         addAccountStub
     }
 }
-
 
 describe('Sing up controller', () => {
     it('should retun 400 if no name is provided', async () => {
@@ -136,7 +135,6 @@ describe('Sing up controller', () => {
             }
         }
 
-
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse.statusCode).toBe(400)
         expect(httpResponse.body).toEqual(new InvalidParamError('email'))
@@ -190,14 +188,14 @@ describe('Sing up controller', () => {
         expect(addSpy).toHaveBeenLastCalledWith({
             name: "any_name",
             email: 'any_email@email.com',
-            password: 'any_password',
+            password: 'any_password'
         })
     })
 
     it('should retun 500 if  addAcount throws', async () => {
         const { sut, addAccountStub } = makeSut()
         jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => {
-            return new Promise((resolve, reject) => reject(new Error))
+            return new Promise((resolve, reject) => reject(new Error()))
         })
         const httpRequest = {
             body: {
