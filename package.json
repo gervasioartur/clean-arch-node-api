@@ -7,12 +7,12 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "start": "node dist/main/api",
-    "test": "jest --passWithNoTests --silent --runInBand --no-cache",
+    "test": "jest --passWithNoTests --silent --runInBand --watch --no-cache",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
     "test:integration": "yarn test -- --watch -c jest-integration-config.js",
     "test:staged": "yarn test --findRelatedTests",
-    "test:ci": "yarn test -- --coverage",
+    "test:ci": "jest --passWithNoTests --silent --runInBand --no-cache -- --coverage",
     "prepare": "husky install",
     "style:fix": "lint-staged"
   },
