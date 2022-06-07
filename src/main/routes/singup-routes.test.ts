@@ -1,4 +1,4 @@
-import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
+import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
 import request from 'supertest'
 import {app} from '../config/app'
 
@@ -18,7 +18,7 @@ describe('Sing up routes', ()=>{
 
     it('should return an account on sucess', async ()=>{
         await request(app)
-        .post('/singup')
+        .post('/api/singup')
         .send({
             name: 'usuario test',
             email: 'usuario@test.com',
