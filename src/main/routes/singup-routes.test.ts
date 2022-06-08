@@ -17,7 +17,7 @@ describe('Sing up routes', () => {
   })
 
   it('should return an account on sucess', async () => {
-    await request(app)
+    const respo = await request(app)
       .post('/api/singup')
       .send({
         name: 'usuario test',
