@@ -8,7 +8,7 @@
     "build": "rimraf dist && tsc",
     "start": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --runInBand --watch --no-cache",
-    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand --watch",
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
     "test:integration": "yarn test -- --watch -c jest-integration-config.js",
     "test:staged": "yarn test --findRelatedTests",
