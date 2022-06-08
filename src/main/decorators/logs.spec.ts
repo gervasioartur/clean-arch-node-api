@@ -8,7 +8,7 @@ interface SUtTypes {
 
 const makeCOntroller = (): Controller => {
     class ControllerStub implements Controller {
-        async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+        async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
             const httpResponse: HttpResponse = {
                 statusCode: 200,
                 body: {

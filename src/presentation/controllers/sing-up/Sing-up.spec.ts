@@ -170,7 +170,7 @@ describe('Sing up controller', () => {
         }
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse.statusCode).toBe(500)
-        expect(httpResponse.body).toEqual(new ServerError())
+        expect(httpResponse.body).toEqual(new ServerError(httpResponse.body))
     })
 
     it('should call add account with correct values', async () => {
@@ -207,7 +207,7 @@ describe('Sing up controller', () => {
         }
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse.statusCode).toBe(500)
-        expect(httpResponse.body).toEqual(new ServerError())
+        expect(httpResponse.body).toEqual(new ServerError(httpResponse.body))
     })
 
     it('should retun 200 if valid data is provided', async () => {
