@@ -12,7 +12,7 @@ export const makeSingUpController = (): Controller => {
     const bcryptAdpter = new BcryptAdapter(12)
     const accountMongoRepository = new AccountMongoRepository()
     const dbAddAccount = new DbAddAccount(bcryptAdpter, accountMongoRepository)
-    const singUpController = new SingUpController(emailValidatorAdapter, dbAddAccount)
+    const singUpController = new SingUpController(emailValidatorAdapter, dbAddAccount) 
 
-    return new LogControllerDecorator(singUpController)
+    return new LogControllerDecorator(singUpController, null)
 }
