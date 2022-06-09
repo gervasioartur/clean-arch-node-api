@@ -1,10 +1,7 @@
+import { LogErrorRepository } from "../../data/protocols/log-error-repository"
+import { serverError } from "../../presentation/helpers/http-helper"
 import { Controller, HttpRequest, HttpResponse } from "@/presentation/protocols"
 import { LogControllerDecorator } from "./log"
-
-interface SUtTypes {
-    sut: LogControllerDecorator
-    controllerStub: Controller
-}
 
 const makeCOntroller = (): Controller => {
     class ControllerStub implements Controller {
@@ -21,12 +18,29 @@ const makeCOntroller = (): Controller => {
     return new ControllerStub()
 }
 
+const makeLogErrorRepository = (): LogErrorRepository => {
+    class LogErrorRepositoryStub implements LogErrorRepository {
+        async log (stack: string): Promise<void> {
+            return new Promise(resolve => resolve())
+        }
+    }
+    return new LogErrorRepositoryStub()
+}
+
+interface SUtTypes {
+    sut: LogControllerDecorator
+    controllerStub: Controller
+    logErrorRepositoryStub: LogErrorRepository
+}
+
 const makeSut = (): any => {
     const controlerStub = makeCOntroller()
-    const sut = new LogControllerDecorator(controlerStub)
+    const logErrorRepositoryStub = makeLogErrorRepository()
+    const sut = new LogControllerDecorator(controlerStub, logErrorRepositoryStub)
     return {
         sut,
-        controlerStub
+        controlerStub,
+        logErrorRepositoryStub
     }
 }
 
@@ -63,5 +77,24 @@ describe('LogController decorator', () => {
                 name: 'Gervas'
             }
         })
+    })
+
+    it('should call logErrorRepository wuth correct error if controller returns a server error', async () => {
+        const { sut, controlerStub, logErrorRepositoryStub } = makeSut()
+        const fakeError = new Error()
+        fakeError.stack = 'any_stack'
+        const error = serverError(fakeError)
+        const logSpy = jest.spyOn(logErrorRepositoryStub, 'log')
+        jest.spyOn(controlerStub, 'handle').mockReturnValueOnce(new Promise(resolve => resolve(error)))
+        const httpRequest = {
+            body: {
+                name: "any_name",
+                email: 'valid_email@email.com',
+                password: 'any_password',
+                passwordConfirmation: 'any_password'
+            }
+        }
+        await sut.handle(httpRequest)
+        expect(logSpy).toHaveBeenCalledWith('any_stack')
     })
 })
