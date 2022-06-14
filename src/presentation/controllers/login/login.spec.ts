@@ -13,7 +13,7 @@ interface SutTypes {
 
 const makeAuthentication = (): Authentication => {
     class AuthenticatioStub implements Authentication {
-        async auth(email: string, password: string): Promise<string> {
+        async auth (email: string, password: string): Promise<string> {
             return new Promise(resolve => resolve('any_token'))
         }
     }
@@ -29,7 +29,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeEmailValidator = (): EmailValidator => {
     class EmailValidatorStub implements EmailValidator {
-        isValid(email: string): boolean {
+        isValid (email: string): boolean {
             return true
         }
     }
