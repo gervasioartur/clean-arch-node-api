@@ -1,9 +1,6 @@
 import { InvalidParamError, MissingParamError } from "../../../presentation/errors";
 import { badRequest, serverError, unauthorized } from "../../../presentation/helpers/http-helper";
-import { resolve } from "path";
-import { Controller, HttpRequest, HttpResponse } from "../../protocols/";
-import { EmailValidator } from "../sing-up";
-import { Authentication } from "../../../domain/useCases/authentication";
+import { Controller, HttpRequest, HttpResponse, EmailValidator, Authentication } from "./login-protocols";
 
 export class LoginController implements Controller {
     constructor (

@@ -1,7 +1,7 @@
-import { EmailValidator, AddAccount, AccountModel, AddAccountModel, HttpRequest } from '.'
+import { EmailValidator, AddAccount, AccountModel, AddAccountModel, HttpRequest } from './singup-protocols'
 import { SingUpController } from './singup'
 import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
-import { ok, serverError, badRequest } from '../../helpers/http-helper'
+import { ok, badRequest } from '../../helpers/http-helper'
 
 const makeEmailValidator = (): EmailValidator => {
     class EmailValidatorStub implements EmailValidator {

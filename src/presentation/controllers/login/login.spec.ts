@@ -1,8 +1,6 @@
-import { Authentication } from "../../../domain/useCases/authentication"
-import { LogControllerDecorator } from "../../../main/decorators/log"
 import { InvalidParamError, MissingParamError, UnauthorizedError } from "../../../presentation/errors"
 import { badRequest, serverError, unauthorized } from "../../../presentation/helpers/http-helper"
-import { EmailValidator, HttpRequest } from "../sing-up"
+import { EmailValidator, HttpRequest,Authentication } from "./login-protocols"
 import { LoginController } from "./login"
 
 interface SutTypes {
