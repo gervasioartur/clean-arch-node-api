@@ -41,7 +41,7 @@ const makeaddAccount = (): AddAccount => {
 
 const makeValidation = (): Validation => {
     class ValidationStub implements Validation {
-         validate (input: any): Error {
+        validate (input: any): Error {
             return null
         }
     }
@@ -65,7 +65,7 @@ const makeSut = (): SutTypes => {
     const emailValidatorStub = makeEmailValidator()
     const addAccountStub = makeaddAccount()
     const validationStub = makeValidation()
-    const sut = new SingUpController(emailValidatorStub, addAccountStub,validationStub)
+    const sut = new SingUpController(addAccountStub,validationStub)
     return {
         sut,
         emailValidatorStub,
@@ -75,30 +75,6 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Sing up controller', () => {
-    it('should retun 400 if the email invalid', async () => {
-        const { sut, emailValidatorStub } = makeSut()
-        jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
-        const httpResponse = await sut.handle(makeFakeRequest())
-        expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
-    })
-
-    it('should call EmailValidator with correct email', async () => {
-        const { sut, emailValidatorStub } = makeSut()
-        const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
-        const httpResponse = await sut.handle(makeFakeRequest())
-        expect(isValidSpy).toHaveBeenLastCalledWith('any_email@email.com')
-    })
-
-    it('should retun 500 if  EmailValidator throws', async () => {
-        const { sut, emailValidatorStub } = makeSut()
-        jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
-            throw new Error()
-        })
-        const httpResponse = await sut.handle(makeFakeRequest())
-        expect(httpResponse.statusCode).toBe(500)
-        expect(httpResponse.body).toEqual(new ServerError(null))
-    })
-
     it('should call add account with correct values', async () => {
         const { sut, addAccountStub } = makeSut()
         const addSpy = jest.spyOn(addAccountStub, 'add')
