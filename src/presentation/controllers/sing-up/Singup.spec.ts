@@ -1,16 +1,7 @@
-import { EmailValidator, AddAccount, AccountModel, AddAccountModel, HttpRequest,Validation } from './singup-protocols'
+import { AddAccount, AccountModel, AddAccountModel, HttpRequest,Validation } from './singup-protocols'
 import { SingUpController } from './singup'
 import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
 import { ok, badRequest } from '../../helpers/http-helper'
-
-const makeEmailValidator = (): EmailValidator => {
-    class EmailValidatorStub implements EmailValidator {
-        isValid (email: string): boolean {
-            return true
-        }
-    }
-    return new EmailValidatorStub()
-}
 
 const makeFakeRequest = (): HttpRequest => ({
     body: {
@@ -20,15 +11,6 @@ const makeFakeRequest = (): HttpRequest => ({
         passwordConfirmation: 'any_password'
     }
 })
-
-const makeEmailValidatorWithError = (): EmailValidator => {
-    class EmailValidatorStub implements EmailValidator {
-        isValid (email: string): boolean {
-            throw new Error()
-        }
-    }
-    return new EmailValidatorStub()
-}
 
 const makeaddAccount = (): AddAccount => {
     class AddAccountStub implements AddAccount {
@@ -49,7 +31,6 @@ const makeValidation = (): Validation => {
 }
 interface SutTypes {
     sut: SingUpController
-    emailValidatorStub: EmailValidator
     addAccountStub: AddAccount
     validationStub: Validation
 }
@@ -62,13 +43,11 @@ const makefakeAccount = (): AccountModel => ({
 })
 
 const makeSut = (): SutTypes => {
-    const emailValidatorStub = makeEmailValidator()
     const addAccountStub = makeaddAccount()
     const validationStub = makeValidation()
     const sut = new SingUpController(addAccountStub,validationStub)
     return {
         sut,
-        emailValidatorStub,
         addAccountStub,
         validationStub
     }

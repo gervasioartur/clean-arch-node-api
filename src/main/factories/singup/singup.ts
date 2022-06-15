@@ -1,10 +1,10 @@
-import { LogMongoRepository } from '../../infra/db/mongodb/mongo-repository/log-mongo-repository';
+import { LogMongoRepository } from '../../../infra/db/mongodb/mongo-repository/log-mongo-repository';
 import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols';
-import { DbAddAccount } from '../../data/useCases/add-account/db-add-acount'
-import { BcryptAdapter } from '../../infra/criptography/bcrypt-adapter'
-import { AccountMongoRepository } from "../../infra/db/mongodb/account-repository/account";
-import { SingUpController } from "../../presentation/controllers/sing-up/singup"
-import { LogControllerDecorator } from '../decorators/log';
+import { DbAddAccount } from '../../../data/useCases/add-account/db-add-acount'
+import { BcryptAdapter } from '../../../infra/criptography/bcrypt-adapter'
+import { AccountMongoRepository } from "../../../infra/db/mongodb/account-repository/account";
+import { SingUpController } from "../../../presentation/controllers/sing-up/singup"
+import { LogControllerDecorator } from '../../decorators/log';
 import { makeSinupValidation } from './singup-validation';
 
 export const makeSingUpController = (): Controller => {
