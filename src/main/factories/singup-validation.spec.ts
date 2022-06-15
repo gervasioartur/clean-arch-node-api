@@ -2,6 +2,7 @@ import { Validation } from "../../presentation/helpers/validators/validation"
 import { RequedFieldValidation } from "../../presentation/helpers/validators/required-field-validation"
 import { ValidationComposite } from "../../presentation/helpers/validators/validation-composite"
 import { makeSinupValidation } from "./singup-validation"
+import { CompareFiedsValidation } from "../../presentation/helpers/validators/compare-fields-validation"
 
 jest.mock('../../presentation/helpers/validators/validation-composite')
 
@@ -13,6 +14,7 @@ describe('SingupValidator', () => {
             validations.push(new RequedFieldValidation(field)
             )
         }
+        validations.push(new CompareFiedsValidation('password','passwordConfirmation'))
         expect(ValidationComposite).toHaveBeenCalledWith(validations)
     })
 })
