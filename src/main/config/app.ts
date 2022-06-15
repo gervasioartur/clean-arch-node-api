@@ -5,4 +5,4 @@ import setUpRoutes from './routes'
 const app = express()
 setUpMiddlewares(app) 
 setUpRoutes(app)
-export {app}
+export { app }
