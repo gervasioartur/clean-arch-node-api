@@ -1,13 +1,13 @@
 import { Validation } from '../../../presentation/protocols/validation';
-import { RequedFieldValidation, ValidationComposite, CompareFiedsValidation, EmailValidation } from '../../../presentation/helpers/validators/';
+import { ValidationComposite, RequedFieldValidation, EmailValidation } from '../../../presentation/helpers/validators/';
 import { EmailValidatorAdapter } from '../../../utils/email-validator-adapter';
-export const makeSinupValidation = (): ValidationComposite => {
+
+export const makeLoginValidation = (): ValidationComposite => {
     const validations: Validation[] = []
-    for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {
+    for (const field of ['email', 'password']) {
         validations.push(new RequedFieldValidation(field)
         )
     }
-    validations.push(new CompareFiedsValidation('password', 'passwordConfirmation'))
     validations.push(new EmailValidation('email', new EmailValidatorAdapter()))
     return new ValidationComposite(validations)
 }
