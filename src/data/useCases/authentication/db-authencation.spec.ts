@@ -25,12 +25,12 @@ const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 }
 
 const makeEncrypter = (): Encrypter => {
-    class TokenGeneratorStub implements Encrypter {
+    class encrypterStub implements Encrypter {
         async encrypt (id: string): Promise<string> {
             return new Promise(resolve => resolve('any_token'))
         }
     }
-    return new TokenGeneratorStub()
+    return new encrypterStub()
 }
 
 const makeHashComparer = (): HashComparer => {
@@ -122,7 +122,7 @@ describe('DbAuthentication useCase', () => {
         expect(accesToken).toBeNull()
     }) 
 
-    it('should call tokenGeneratoir with correct id',async () => { 
+    it('should call encrypter with correct id',async () => { 
         const { sut, encrypterStub } = makeSut()
         const generateSpy = jest.spyOn(encrypterStub, 'encrypt')
         await sut.auth(makeFaleAuth())
