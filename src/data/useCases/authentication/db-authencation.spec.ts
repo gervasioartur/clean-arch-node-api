@@ -25,12 +25,12 @@ const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 }
 
 const makeEncrypter = (): Encrypter => {
-    class encrypterStub implements Encrypter {
+    class EncrypterStub implements Encrypter {
         async encrypt (id: string): Promise<string> {
             return new Promise(resolve => resolve('any_token'))
         }
     }
-    return new encrypterStub()
+    return new EncrypterStub()
 }
 
 const makeHashComparer = (): HashComparer => {
