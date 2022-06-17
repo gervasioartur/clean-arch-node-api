@@ -5,4 +5,4 @@ export * from '../../../data/protocols/db/add-account-repository'
 export * from '../../../data/protocols/db/update-access-token-repository'
 export * from '../../../domain/useCases/authentication'
 export * from '../../protocols/criptography/hash-compare';
-export * from '../../protocols/criptography/token-gerantor';
+export * from '../../protocols/criptography/encrypter';
