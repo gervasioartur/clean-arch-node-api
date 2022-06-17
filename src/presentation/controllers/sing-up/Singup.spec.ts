@@ -1,7 +1,7 @@
 import { AddAccount, AccountModel, AddAccountModel, HttpRequest,Validation } from './singup-protocols'
 import { SingUpController } from './singup'
 import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
-import { ok, badRequest } from '../../helpers/http-helper'
+import { ok, badRequest } from '../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
     body: {
