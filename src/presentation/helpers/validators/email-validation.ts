@@ -7,9 +7,7 @@ export class EmailValidation implements Validation {
   constructor (
     private readonly fiedlName: string,
     private readonly emailValidator: EmailValidator
-  ) {
-    this.fiedlName = fiedlName
-  }
+  ) {}
 
   validate (input: any): Error {
     const isValid = this.emailValidator.isValid(input[this.fiedlName])

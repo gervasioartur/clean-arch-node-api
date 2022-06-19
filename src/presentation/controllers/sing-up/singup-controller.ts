@@ -6,10 +6,7 @@ export class SingUpController implements Controller {
     constructor (
         private readonly addAccount: AddAccount,
         private readonly validation: Validation
-    ) {
-        this.addAccount = addAccount
-        this.validation = validation
-    }
+    ) {}
 
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
