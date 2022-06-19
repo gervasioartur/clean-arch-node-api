@@ -1,5 +1,5 @@
 import { LogMongoRepository } from '../../../infra/db/mongodb/log/log-mongo-repository';
-import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols';
+import { Controller, HttpRequest, HttpResponse } from '../../../presentation/protocols';
 import { DbAddAccount } from '../../../data/useCases/add-account/db-add-acount'
 import { BcryptAdapter } from '../../../infra/criptography/bcrypt-adapter/bcrypt-adapter'
 import { AccountMongoRepository } from "../../../infra/db/mongodb/account/account-mongo-repository";

@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && tsc",
-    "start": "sucrase-node src/main/server.ts",
+    "start": "node dist/main/server.js",
+    "dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --runInBand --watch --no-cache",
     "test:verbose": "jest --passWithNoTests --runInBand ",
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",

@@ -9,7 +9,7 @@ interface SutTypes {
 
 const makeValidation = (): Validation => {
     class ValidatioSTub implements Validation {
-        validate (input: any): Error {
+        validate (input: any): Error | null {
             return null
         }
     }
