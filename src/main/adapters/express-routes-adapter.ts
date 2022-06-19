@@ -10,7 +10,6 @@ export const adaptRoute = (controller: Controller) => {
         if (httpResponse.statusCode === 200) {
             res.status(httpResponse.statusCode).json(httpResponse.body)
         } else {
-            console.log(httpResponse.body)
             res.status(httpResponse.statusCode).json({ error: httpResponse.body.message })
         }
     }
