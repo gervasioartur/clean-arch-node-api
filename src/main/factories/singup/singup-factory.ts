@@ -1,6 +1,7 @@
 import { LogMongoRepository } from '../../../infra/db/mongodb/log/log-mongo-repository';
 import { Controller } from '../../../presentation/protocols';
 import { DbAddAccount } from '../../../data/useCases/add-account/db-add-acount'
+import { DbLoadAccountById } from '../../../data/useCases/load-account-by-id/load-account-by-id'
 import { BcryptAdapter } from '../../../infra/criptography/bcrypt-adapter/bcrypt-adapter'
 import { AccountMongoRepository } from "../../../infra/db/mongodb/account/account-mongo-repository";
 import { SingUpController } from "../../../presentation/controllers/sing-up/singup-controller"
@@ -12,7 +13,8 @@ export const makeSingUpController = (): Controller => {
     const bcryptAdpter = new BcryptAdapter(12)
     const accountMongoRepository = new AccountMongoRepository()
     const dbAddAccount = new DbAddAccount(bcryptAdpter, accountMongoRepository)
-    const singUpController = new SingUpController(dbAddAccount, makeSinupValidation())
+    const dbLoadAccount = new DbLoadAccountById(accountMongoRepository)
+    const singUpController = new SingUpController(dbAddAccount, makeSinupValidation(),dbLoadAccount)
     const logMongoRepository = new LogMongoRepository()
     return new LogControllerDecorator(singUpController, logMongoRepository)
 }
