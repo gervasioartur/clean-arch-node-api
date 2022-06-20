@@ -15,12 +15,12 @@ export class SingUpController implements Controller {
                 return badRequest(error)
             }
             const { name, email, password } = httpRequest.body
-            const account = await this.addAccount.add({
+            const accountId = await this.addAccount.add({
                 name,
                 email,
                 password
             })
-            return ok(account)
+            return ok(accountId)
         } catch (error) {
             return serverError(error)
         }
