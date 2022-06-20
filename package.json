@@ -13,7 +13,7 @@
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
     "test:integration": "yarn test -- --watch -c jest-integration-config.js",
     "test:staged": "jest --passWithNoTests --silent --runInBand --no-cache",
-    "test:ci": "jest --passWithNoTests --silent --runInBand --no-cache  --coverage",
+    "test:ci": "jest --passWithNoTests --silent --runInBand --no-cache  --coverage --detectOpenHandles" ,
     "prepare": "husky install",
     "style:fix": "lint-staged"
   },
