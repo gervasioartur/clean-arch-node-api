@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "target": "es2021",
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
+    "target": "es2021",
     "esModuleInterop": true,
+    // "sourceMap": true,
+    "rootDirs": ["src", "tests"],
+    "baseUrl": "src",
+    "paths": {
+      "@/tests/*": ["../tests/*"],
+      "@/*": ["*"]
+    }
   },
-  "include": [
-    "./src/**/*",
-    "./typings/*"
-  ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "include": ["src", "tests"],
+  "exclude": ["**/*.spec.ts","**/*.test.ts"]
 }
