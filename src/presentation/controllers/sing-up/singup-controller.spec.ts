@@ -1,4 +1,4 @@
-import { AddAccount, AccountModel, AddAccountModel, HttpRequest,Validation } from './singup-controller-protocols'
+import { AddAccount, AccountModel, AddAccountModel, LoadAccountById, HttpRequest,Validation } from './singup-controller-protocols'
 import { SingUpController } from './singup-controller'
 import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
 import { ok, badRequest } from '../../helpers/http/http-helper'
@@ -21,9 +21,18 @@ const makeaddAccount = (): AddAccount => {
     return new AddAccountStub()
 }
 
+const makeLoadAccountById = (): LoadAccountById => {
+    class LoadAccountByIdStub implements LoadAccountById {
+        async load (accountId: any): Promise<AccountModel> {
+            return new Promise(resolve => resolve(makefakeAccount()))
+        }
+    }
+    return new LoadAccountByIdStub()
+}
+
 const makeValidation = (): Validation => {
     class ValidationStub implements Validation {
-        validate (input: any): Error {
+        validate (input: any): Error | null {
             return null
         }
     }
@@ -33,6 +42,7 @@ interface SutTypes {
     sut: SingUpController
     addAccountStub: AddAccount
     validationStub: Validation
+    loadAccountByIdStub: LoadAccountById
 }
 
 const makefakeAccount = (): AccountModel => ({
@@ -45,11 +55,13 @@ const makefakeAccount = (): AccountModel => ({
 const makeSut = (): SutTypes => {
     const addAccountStub = makeaddAccount()
     const validationStub = makeValidation()
-    const sut = new SingUpController(addAccountStub,validationStub)
+    const loadAccountByIdStub = makeLoadAccountById()
+    const sut = new SingUpController(addAccountStub,validationStub, loadAccountByIdStub)
     return {
         sut,
         addAccountStub,
-        validationStub
+        validationStub,
+        loadAccountByIdStub
     }
 }
 
@@ -64,6 +76,27 @@ describe('Sing up controller', () => {
             password: 'any_password'
         })
     })
+    
+    it('should call  LoadByEmail with correct values', async () => {
+        const { sut, loadAccountByIdStub } = makeSut()
+        const loadByIsSpy = jest.spyOn(loadAccountByIdStub, 'load')
+        await loadAccountByIdStub.load('any_accout_id')
+        expect(loadByIsSpy).toHaveBeenLastCalledWith('any_accout_id')
+    })
+
+    it('should return 401 if LoadByEmail returns null', async () => {
+        const { sut, loadAccountByIdStub } = makeSut()
+        jest.spyOn(loadAccountByIdStub, 'load').mockReturnValueOnce(null)
+        const httpResponse = await sut.handle(makeFakeRequest())
+        const account = await loadAccountByIdStub.load('any_accout_id')
+        expect(httpResponse.statusCode).toBe(401)
+    })
+
+    it('should return an account on success', async () => {
+        const { sut, loadAccountByIdStub } = makeSut()
+        const account = await loadAccountByIdStub.load('any_accout_id')
+        expect(account).toEqual(makefakeAccount())
+    })
 
     it('should retun 500 if  addAcount throws', async () => {
         const { sut, addAccountStub } = makeSut()
@@ -72,7 +105,7 @@ describe('Sing up controller', () => {
         })
         const httpResponse = await sut.handle(makeFakeRequest())
         expect(httpResponse.statusCode).toBe(500)
-        expect(httpResponse.body).toEqual(new ServerError(null))
+        expect(httpResponse.body).toEqual(new ServerError(''))
     })
 
     it('should retun 200 if valid data is provided', async () => {
