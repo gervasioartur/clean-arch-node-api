@@ -1,4 +1,4 @@
-import { Controller, HttpRequest, HttpResponse, AddAccount, LoadAccountById, Validation } from './singup-controller-protocols'
+import { Controller, HttpRequest, HttpResponse, AddAccount, LoadAccountById,Authentication,AuthenticationModel, Validation } from './singup-controller-protocols'
 import { MissingParamError, InvalidParamError, UnauthorizedError } from '../../errors'
 import { badRequest, serverError, unauthorized, ok } from '../../helpers/http/http-helper'
 
@@ -6,7 +6,7 @@ export class SingUpController implements Controller {
     constructor (
         private readonly addAccount: AddAccount,
         private readonly validation: Validation,
-        private readonly loadAccountByEmail: LoadAccountById
+        private readonly authentication: Authentication
         
     ) {}
 
@@ -17,16 +17,9 @@ export class SingUpController implements Controller {
                 return badRequest(error)
             }
             const { name, email, password } = httpRequest.body
-            const accountId = await this.addAccount.add({
-                name,
-                email,
-                password
-            })
-            const account = await this.loadAccountByEmail.load(accountId)
-            if (!account) {
-               return unauthorized()
-            }
-            return ok(account)
+            const account = await this.addAccount.add({ name,email, password })
+            const accessToken = await this.authentication.auth({ email: account.email,password: account.password })
+            return ok({ accessToken })
         } catch (error) {
             return serverError(error)
         }
