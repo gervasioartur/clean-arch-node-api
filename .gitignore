@@ -1,9 +1,9 @@
 dist
 coverage
 node_modules
-
 yarn-*.*
 yarn.*
 data
-globalConfig.json
 !src/data
+.vscode
+globalConfig.json
