@@ -107,12 +107,12 @@ describe('Sing up controller', () => {
         const authSpy = jest.spyOn(authenticationStub, 'auth')
         await sut.handle(makeFakeRequest())
         expect(authSpy).toHaveBeenCalledWith({
-            email: 'valid_email@email.com',
-            password: 'valid_password'
+            email: 'any_email@email.com',
+            password: 'any_password'
         })
     })
 
-    it('Should  retur 500 if authentication thows', async () => {
+    it('Should  return 500 if authentication thows', async () => {
         const { sut, authenticationStub } = makeSut()
         jest.spyOn(authenticationStub, 'auth').mockImplementationOnce(async () => {
             return new Promise((resolve, reject) => reject(new Error()))
