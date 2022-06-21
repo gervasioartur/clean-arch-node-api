@@ -66,7 +66,7 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Sing up controller', () => {
-    it('should call Validation with correct value', async () => {
+    it('should call validation with correct value', async () => {
         const { sut, validationStub } = makeSut()
         const validateSpy = jest.spyOn(validationStub, 'validate')
         const httpRequest = makeFakeRequest()
@@ -90,6 +90,13 @@ describe('Sing up controller', () => {
             email: 'any_email@email.com',
             password: 'any_password'
         })
+    })
+
+    it('should retun 403 if  addAcount returns null', async () => {
+        const { sut, addAccountStub } = makeSut()
+        jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(new Promise((resolve) => resolve(null)))
+        const httpResponse = await sut.handle(makeFakeRequest())
+        expect(httpResponse.statusCode).toBe(403)
     })
 
     it('should retun 500 if  addAcount throws', async () => {
