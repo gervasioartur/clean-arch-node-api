@@ -4,5 +4,6 @@ node_modules
 
 yarn-*.*
 yarn.*
-globalConfig.json
 data
+globalConfig.json
+!src/data
