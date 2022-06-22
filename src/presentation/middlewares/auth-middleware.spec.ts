@@ -52,7 +52,14 @@ describe('Auth Middlewrare', () => {
     it('should call LoadAccountByToken With correct accessToken', async () => {
         const { sut, loadAccountByTokenStub } = makeSut()        
         const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load')
-        const httpResponse = await sut.handle(makefakeRequest())
+        await sut.handle(makefakeRequest())
         expect(loadSpy).toHaveBeenCalledWith('any_token')
+    })
+
+    it('should retrun 403 if LoadAccountByToken return null', async () => {
+        const { sut, loadAccountByTokenStub } = makeSut()    
+        jest.spyOn(loadAccountByTokenStub, 'load').mockRejectedValueOnce(new Promise(resolve => resolve(null)))    
+        const httpResponse = await sut.handle({})
+        expect(httpResponse).toEqual(forbidden(new AccessDenied()))
     })
 })
