@@ -15,7 +15,7 @@ const makeEmailValidator = (): EmailValidator => {
 }
 
 describe('SingupValidator', () => {
-    it('should call ValidationComposito with all validations', () => {
+    it('should call ValidationCompositor with all validations', () => {
         makeSinupValidation()
         const validations: Validation[] = []
         for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {
