@@ -1,5 +1,5 @@
 import { LoadAccountByToken } from "../../domain/useCases/load-account-by-token";
-import { AccessDenied } from "../errors";
+import { AccessDeniedError } from "../errors";
 import { forbidden } from "../helpers/http/http-helper";
 import { HttpRequest, HttpResponse, Middleware } from "../protocols";
 
@@ -12,6 +12,6 @@ export class AuthMiddleware implements Middleware {
         if (accessToken) {
             await this.loadAccountByToken.load(accessToken)
         }
-        return forbidden(new AccessDenied())
+        return forbidden(new AccessDeniedError())
     }
 }
