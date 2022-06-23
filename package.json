@@ -15,7 +15,7 @@
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
     "test:integration": "yarn test -- --watch -c jest-integration-config.js",
     "test:staged": "jest --passWithNoTests --silent --runInBand --no-cache",
-    "test:coveralls": "jest --passWithNoTests --silent --runInBand --no-cache  --coverage  && coveralls < coverage/lcov.info",
+    "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info",
     "test:ci": "jest --passWithNoTests --silent --runInBand --no-cache  --coverage ",
     "prepare": "husky install",
     "style:fix": "lint-staged"
