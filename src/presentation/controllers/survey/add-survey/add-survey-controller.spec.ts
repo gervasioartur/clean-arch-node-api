@@ -1,6 +1,7 @@
-import { HttpRequest, Validation, AddSurvey, AddSurveyModel } from './add-survey-controller-protocols'
 import { AddSurveyController } from './add-survey-controller'
 import { badRequest, serverError, noContent } from '../../../helpers/http/http-helper'
+import { HttpRequest, Validation } from '../../../protocols'
+import { AddSurvey, AddSurveyModel } from '../../../../domain/useCases/add-survey'
 
 const makeFakeRequest = (): HttpRequest => ({
     body: {
@@ -19,7 +20,7 @@ interface SutTypes {
 
 const makeValidation = (): Validation => {
     class ValidationStub implements Validation {
-        validate (input: any): Error {
+        validate (input: any): Error | null {
             return null
         }
     }
