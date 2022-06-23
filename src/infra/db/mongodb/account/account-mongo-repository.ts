@@ -21,9 +21,19 @@ export class AccountMongoRepository implements AddAccountRepository, LoadAccount
     }
     async loadByToken (token: any, role?: string): Promise<AccountModel> {
         const accountColleaction = await MongoHelper.getCollection('accounts')
-        const account = await accountColleaction.findOne({ accessToken: token, role })
+        const account = await accountColleaction.findOne({
+            accessToken: token,
+            $or: [
+                {
+                    role
+                }, {
+                    role: 'admin'
+                }],
+            role
+        })
         return account && MongoHelper.map(account)
     }
+
     async loadById (id: any): Promise<AccountModel> {
         const accountColleaction = await MongoHelper.getCollection('accounts')
         const account = await accountColleaction.findOne({ _id: id })
@@ -31,13 +41,13 @@ export class AccountMongoRepository implements AddAccountRepository, LoadAccount
     }
 
     async updateAccessToken (id: any, token: string): Promise<void> {
-    const accountColleaction = await MongoHelper.getCollection('accounts')
-    await accountColleaction.updateOne(
-        { _id: id },
-        {
-            $set: {
-                accessToken: token
-            }
-        })
+        const accountColleaction = await MongoHelper.getCollection('accounts')
+        await accountColleaction.updateOne(
+            { _id: id },
+            {
+                $set: {
+                    accessToken: token
+                }
+            })
     }
 }
