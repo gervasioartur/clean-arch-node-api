@@ -1,3 +1,3 @@
 export interface Decrypter {
-    decrypt (accessToken: string): Promise<string>
+    decrypt (accessToken: string): Promise<any>
 }
