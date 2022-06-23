@@ -1,7 +1,10 @@
-import { AddAccount, AccountModel, AddAccountModel, Authentication, AuthenticationModel,HttpRequest,Validation } from './singup-controller-protocols'
 import { SingUpController } from './singup-controller'
 import { MissingParamError, ServerError } from '../../../errors'
 import { ok, badRequest } from '../../../helpers/http/http-helper'
+import { HttpRequest, Validation } from '../../../protocols'
+import { AddAccountModel, AddAccount } from '../../../../domain/useCases/add-account'
+import { Authentication, AuthenticationModel } from '../../../../domain/useCases/authentication'
+import { AccountModel } from '../../../../domain/models/Account'
 
 const makeFakeRequest = (): HttpRequest => ({
     body: {
@@ -56,7 +59,7 @@ const makeSut = (): SutTypes => {
     const addAccountStub = makeaddAccount()
     const validationStub = makeValidation()
     const authenticationStub = makeAuthentication()
-    const sut = new SingUpController(addAccountStub,validationStub, authenticationStub)
+    const sut = new SingUpController(addAccountStub, validationStub, authenticationStub)
     return {
         sut,
         addAccountStub,
@@ -75,7 +78,7 @@ describe('Sing up controller', () => {
     })
 
     it('should retun 400 if validation return an error', async () => {
-        const { sut , validationStub } = makeSut()
+        const { sut, validationStub } = makeSut()
         jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
         const httpResponse = await sut.handle(makeFakeRequest())
         expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
@@ -124,8 +127,8 @@ describe('Sing up controller', () => {
         jest.spyOn(authenticationStub, 'auth').mockImplementationOnce(async () => {
             return new Promise((resolve, reject) => reject(new Error()))
         })
-       const httpResponse = await sut.handle(makeFakeRequest())
-       expect(httpResponse.statusCode).toBe(500)
+        const httpResponse = await sut.handle(makeFakeRequest())
+        expect(httpResponse.statusCode).toBe(500)
     })
 
     it('Should statusCode 200 and accessToken on success', async () => {
