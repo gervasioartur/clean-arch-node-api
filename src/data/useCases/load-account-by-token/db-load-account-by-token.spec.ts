@@ -1,7 +1,7 @@
 import { LoadAccountByToken, Decrypter, AccountModel } from './db-load-account-protocols'
 import { DbLoadAccountBytoken } from './db-load-account-by-token'
 
-const makeDecripterStub = (): Decrypter => {
+const makeDecrypter = (): Decrypter => {
     class DecrypterStub implements Decrypter {
         async decrypt (accessToken: string): Promise<string> {
             return new Promise(resolve => resolve('any_id'))
@@ -10,13 +10,13 @@ const makeDecripterStub = (): Decrypter => {
     return new DecrypterStub()
 }
 
-interface SutType {
+interface SutTypes {
     sut: DbLoadAccountBytoken
     decrypterStub: Decrypter
 }
 
-const makeSut = (): SutType => {
-    const decrypterStub = makeDecripterStub()
+const makeSut = (): SutTypes => {
+    const decrypterStub = makeDecrypter()
     const sut = new DbLoadAccountBytoken(decrypterStub)
 
     return {
