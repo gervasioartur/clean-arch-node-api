@@ -4,6 +4,7 @@
         "project": "./tsconfig.eslint.json"
     },
     "rules": {
+        "@typescript-eslint/lines-between-class-members":"off",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/comma-spacing": "off",
         "@typescript-eslint/quotes": "off",

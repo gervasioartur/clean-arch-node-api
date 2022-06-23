@@ -4,12 +4,12 @@ import {
     AddAccountModel, 
     AddAccountRepository, 
     Hasher 
-} from "./add-account-protocols"
+} from "./db-add-account-protocols"
 import { DbAddAccount } from "./db-add-acount"
 
 const makeHasher = (): Hasher => {
     class HasherStub implements Hasher {
-       async hash (value: string): Promise<string> {
+    async hash (value: string): Promise<string> {
             return new Promise(resolve => resolve('hashed_password'))
         }
     }
