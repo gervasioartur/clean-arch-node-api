@@ -1,5 +1,5 @@
-import { Validation } from '../../../../presentation/protocols/validation';
-import { ValidationComposite, RequedFieldValidation } from '../../../../validation/validators';
+import { Validation } from '../../../../../presentation/protocols/validation';
+import { ValidationComposite, RequedFieldValidation } from '../../../../../validation/validators';
 
 export const makeAddSorveyValidation = (): ValidationComposite => {
     const validations: Validation[] = []
