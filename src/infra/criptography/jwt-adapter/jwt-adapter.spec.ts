@@ -12,6 +12,7 @@ const makeSut = (): JwtAdapter => {
 }
 
 describe('JwtAdapter', () => {
+    describe('sing()', () => {
     it('should calls JwtAdapter sign with correct values',async () => {
         const sut = makeSut()
         const singSpy = jest.spyOn(jwt, 'sign')
@@ -30,5 +31,6 @@ describe('JwtAdapter', () => {
         jest.spyOn(jwt, 'sign').mockImplementationOnce(() => { throw new Error() })
         const promise = sut.encrypt('any_id')
         await expect(promise).rejects.toThrow()
+    })
     })
 })
