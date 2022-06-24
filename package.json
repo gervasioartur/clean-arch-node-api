@@ -8,7 +8,7 @@
         "build": "rimraf dist && tsc",
         "start": "node dist/main/server.js",
         "debug": "nodemon -L --watch ./dist  ./dist/main/server.js",
-        "up": "yarn build && sudo docker-compose up -d",
+        "up": "yarn build && sudo docker-compose up ",
         "down": "sudo docker-compose down",
         "test": "jest --passWithNoTests --silent --runInBand --watch --no-cache",
         "test:verbose": "jest --passWithNoTests --runInBand  --watch",
