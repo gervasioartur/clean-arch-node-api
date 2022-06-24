@@ -6,7 +6,7 @@
     "license": "MIT",
     "scripts": {
         "build": "rimraf dist && tsc",
-        "start": "node dist/main/server.js",
+        "start": "yarn build && node dist/main/server.js",
         "debug": "nodemon -L --watch ./dist  ./dist/main/server.js",
         "up": "yarn build && sudo docker-compose up -d",
         "down": "sudo docker-compose down",
