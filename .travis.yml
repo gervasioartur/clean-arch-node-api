@@ -7,7 +7,7 @@ script:
     - eslint 'src/**'
     - yarn test:coveralls
     - docker login --username $HEROKU_DOCKER_USERNAME --password $HEROKU_API_KEY registry.heroku.com
-    - yan up
+    - yarn up
 
 deploy:
     - provider: script
