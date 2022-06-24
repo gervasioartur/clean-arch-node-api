@@ -21,8 +21,6 @@ jobs:
       - run:
           command: yarn test:ci
           name: Run continuos integration test 
-      - store_test_results:
-          path: test-results
       - persist_to_workspace:
           root: ~/project
           paths: .
