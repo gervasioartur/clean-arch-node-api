@@ -16,9 +16,13 @@ jobs:
     steps:
       - node/install-packages:
           pkg-manager: npm 
-
+      - run:
+          command: yarn install
+          name: Run install packages
+      - run:
+          command: yarn test:ci
+          name: Run test 
 workflows:
   instalation-workflow:
     jobs:
       - instalation-job
-      - node/test
