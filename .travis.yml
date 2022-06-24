@@ -6,10 +6,6 @@ before_script:
 script:
     - eslint 'src/**'
     - yarn test:coveralls
-    - docker login --username $HEROKU_DOCKER_USERNAME --password $HEROKU_API_KEY registry.heroku.com
-    - yarn build
-    - docker-compose up -d
-    - docker tag clean-node-api-v registry.heroku.com/clean-node-api-v/web
 
 deploy:
     - provider: script
