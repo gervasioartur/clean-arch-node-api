@@ -6,6 +6,7 @@ before_script:
 script:
     - eslint 'src/**'
     - yarn test:coveralls
+    - yarn build
 
 deploy:
     - provider: script
