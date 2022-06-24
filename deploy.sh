@@ -1,6 +1,5 @@
 
 docker login --username $HEROKU_DOCKER_USERNAME --password $HEROKU_API_KEY registry.heroku.com
-yarn install
 yarn up
 docker tag clean-node-api-v registry.heroku.com/clean-node-api-v
 heroku container:push -a clean-node-api-v web
