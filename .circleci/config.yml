@@ -12,6 +12,7 @@ jobs:
   instalation-job:
     executor: node/default # use the default executor defined within the orb
     steps:
+      - checkout
       - node/install-packages:
           pkg-manager: npm 
       - run:
@@ -20,6 +21,9 @@ jobs:
       - run:
           command: yarn test:ci
           name: Run test 
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
 workflows:
   instalation-workflow:
     jobs:
