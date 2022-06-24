@@ -10,13 +10,12 @@ services:
             - "27017:27017"
     api:
         container_name: api-container
-        image: node:16
-        working_dir: /usr/src/clean-node-api
-        command: bash  -c "yarn install --only=prod  &&  yarn start"
+        build: .
         restart: always
+        image: clean-node-api
+        command: yarn start
         volumes:
             - ./dist/:/usr/src/clean-node-api/dist/
-            - ./package.json:/usr/src/clean-node-api/package.json
         ports:
             - "5000:5000"
             - "9222:9222"
