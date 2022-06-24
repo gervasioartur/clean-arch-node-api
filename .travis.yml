@@ -2,7 +2,14 @@ language: node_js
 node_js:
     - 16
 before_script:
-    - yarn install 
-script: 
+    - yarn install
+script:
     - eslint 'src/**'
     - yarn test:coveralls
+
+deploy:
+    - provider: script
+      script: bash ./deploy.sh
+      on:
+          branch: master
+
