@@ -9,7 +9,7 @@ orbs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 jobs:
-  instalation-job:
+  instalation_and_testing-job:
     executor: node/default # use the default executor defined within the orb
     steps:
       - checkout
@@ -20,11 +20,13 @@ jobs:
           name: Run install packages
       - run:
           command: yarn test:ci
-          name: Run test 
+          name: Run continuos integration test 
+      - store_test_results:
+          path: test-results
       - persist_to_workspace:
           root: ~/project
           paths: .
 workflows:
-  instalation-workflow:
+  instalation_and_testing-workflow:
     jobs:
-      - instalation-job
+      - instalation_and_testing-job
