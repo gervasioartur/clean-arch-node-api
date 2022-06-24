@@ -6,9 +6,6 @@ before_script:
 script:
     - eslint 'src/**'
     - yarn test:coveralls
-    - docker login --username $HEROKU_DOCKER_USERNAME --password $HEROKU_API_KEY registry.heroku.com
-    - docker-compose build
-
 deploy:
     - provider: script
       script: bash ./deploy.sh
