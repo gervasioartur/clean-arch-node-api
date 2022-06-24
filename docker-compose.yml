@@ -12,10 +12,10 @@ services:
         container_name: api-container
         build: .
         restart: always
-        image: clean-node-api
+        image: clean-node-api-v
         command: yarn start
         volumes:
-            - ./dist/:/usr/src/clean-node-api/dist/
+            - ./dist/:/usr/src/clean-node-api-v/dist/
         ports:
             - "5000:5000"
             - "9222:9222"

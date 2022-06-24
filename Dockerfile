@@ -1,5 +1,5 @@
 FROM node:16
-WORKDIR /usr/src/clean-node-api
+WORKDIR /usr/src/clean-node-api-v
 COPY ./package.json .
 RUN yarn install --only-prod
 COPY ./dist ./dist
