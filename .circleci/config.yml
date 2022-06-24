@@ -10,9 +10,7 @@ orbs:
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 jobs:
   instalation-job:
-    docker:
-      # replace with your preferred image
-      - image: cimg/base:stable
+    executor: node/default # use the default executor defined within the orb
     steps:
       - node/install-packages:
           pkg-manager: npm 
