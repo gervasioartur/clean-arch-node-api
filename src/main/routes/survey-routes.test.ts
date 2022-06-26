@@ -92,43 +92,29 @@ describe('Login routes', () => {
                 .expect(403)
         })
 
-        // it('should return 204 on add surveys with valid token', async () => {
-        //     const password = await hash('123456', 12)
-        //     const res = await accountsColletion.insertOne({
-        //         name: 'usuario test',
-        //         email: 'usuario@test.com',
-        //         role: 'admin',
-        //         password
-        //     })
+        it('should return 204 on load surveys with valid token', async () => {
+            const password = await hash('123456', 12)
+            const res = await accountsColletion.insertOne({
+                name: 'usuario test',
+                email: 'usuario@test.com',
+                password
+            })
 
-        //     const id = res.insertedId
-        //     const accessToken = sign({ id }, env.secret)
+            const id = res.insertedId
+            const accessToken = sign({ id }, env.secret)
 
-        //     await accountsColletion.updateOne({
-        //         _id: id
-        //     }, {
-        //         $set: {
-        //             accessToken
-        //         }
-        //     })
+            await accountsColletion.updateOne({
+                _id: id
+            }, {
+                $set: {
+                    accessToken
+                }
+            })
 
-        //     const respo = await request(app)
-        //         .post('/api/surveys')
-        //         .set('authorization', `Bear ${accessToken}`)
-        //         .send({
-        //             question: 'Question',
-        //             answers: [
-        //                 {
-        //                     image: 'image.png',
-        //                     answer: 'Answer 1'
-        //                 },
-        //                 {
-        //                     answer: 'Answer 1'
-        //                 }
-        //             ]
-        //         }
-        //         )
-        //         .expect(204)
-        // })
+            const respo = await request(app)
+                .get('/api/surveys')
+                .set('authorization', `Bear ${accessToken}`)
+                .expect(204)
+        })
     })
 })  
