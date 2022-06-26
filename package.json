@@ -7,9 +7,9 @@
     "scripts": {
         "build": "rimraf dist && tsc",
         "start": "node dist/main/server.js",
-        "debug": "nodemon -L --watch ./dist  ./dist/main/server.js",
-        "up": "yarn build && docker-compose up ",
-        "down": "docker-compose down",
+        "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/main/server.js",
+        "up": "yarn build && sudo docker-compose up ",
+        "down": "sudo docker-compose down",
         "test": "jest --passWithNoTests --silent --runInBand --watch --no-cache",
         "test:verbose": "jest --passWithNoTests --runInBand  --watch",
         "test:unit": "yarn test -- --watch -c jest-unit-config.js",

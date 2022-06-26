@@ -67,7 +67,7 @@ describe('Login routes', () => {
 
             const respo = await request(app)
                 .post('/api/surveys')
-                .set('x-access-token', accessToken)
+                .set('authorization', `Bear ${accessToken}`)
                 .send({
                     question: 'Question',
                     answers: [

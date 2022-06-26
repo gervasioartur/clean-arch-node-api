@@ -10,12 +10,15 @@ services:
             - "27017:27017"
     api:
         container_name: api-container
-        build: .
+        image: node:16
+        working_dir: /usr/src/clean-node-api
         restart: always
-        image: clean-node-api-v
-        command: yarn start
+        command: bash -c "yarn install --only=prod && yarn debug"
+        environment:
+            - MONGO_URL=mongodb://mongo:27017/clean-node-api
         volumes:
-            - ./dist/:/usr/src/clean-node-api-v/dist/
+            - ./dist/:/usr/src/clean-node-api/dist/
+            - ./package.json:/usr/src/clean-node-api/package.json
         ports:
             - "5000:5000"
             - "9222:9222"
