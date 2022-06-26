@@ -40,13 +40,13 @@ const makeSut = (): SutTypes => {
 }
 
 describe('', () => {
-    beforeAll(() => {
-        Mockdate.set(new Date())
-    })
+    // beforeAll(() => {
+    //     Mockdate.set(new Date())
+    // })
 
-    beforeAll(() => {
-        Mockdate.reset()
-    })
+    // beforeAll(() => {
+    //     Mockdate.reset()
+    // })
 
     it('should  call load surveys', async () => {
         const { sut, loadSurveysStub } = makeSut()
