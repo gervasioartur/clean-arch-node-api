@@ -44,4 +44,10 @@ describe('DbLoadSurveys', () => {
         await sut.load()
         expect(loadAllSpy).toHaveBeenCalled()
     })
+
+    it('should return a List of survesy on success ', async () => {
+        const { sut, loadSurveysRepositoryStub } = makeSut()
+       const surveys = await sut.load()
+        expect(surveys).toEqual(makeFakeSurveys())
+    })
 })
