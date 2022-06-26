@@ -1,6 +1,7 @@
 import { LoadSurveysController } from './load-surveys-controller'
 import { SurveyModel } from '../../../../domain/models/survey'
 import { LoadSurveys } from '../../../../domain/useCases/load-survey'
+import { ok } from '../../../helpers/http/http-helper'
 import Mockdate from 'mockdate'
 
 const makeFakeSurveys = (): SurveyModel[] => {
@@ -15,6 +16,29 @@ const makeFakeSurveys = (): SurveyModel[] => {
     }]
 }
 
+interface SutTypes {
+    sut: LoadSurveysController
+    loadSurveysStub: LoadSurveys
+}
+
+const makeLoadSurveysStub = (): LoadSurveys => {
+    class LoadSurveysStub implements LoadSurveys {
+        async load (): Promise<SurveyModel[]> {
+            return new Promise(resolve => resolve(makeFakeSurveys()))
+        }
+    }
+    return new LoadSurveysStub()
+}
+
+const makeSut = (): SutTypes => {
+    const loadSurveysStub = makeLoadSurveysStub()
+    const sut = new LoadSurveysController(loadSurveysStub)
+    return {
+        sut,
+        loadSurveysStub
+    }
+}
+
 describe('', () => {
     beforeAll(() => {
         Mockdate.set(new Date())
@@ -23,17 +47,17 @@ describe('', () => {
     beforeAll(() => {
         Mockdate.reset()
     })
-    
+
     it('should  call load surveys', async () => {
-        class LoadSurveysStub implements LoadSurveys {
-            async load (): Promise<SurveyModel[]> {
-                return new Promise(resolve => resolve(makeFakeSurveys()))
-            }
-        }
-        const loadSyrveysStub = new LoadSurveysStub()
-        const loadSpy = jest.spyOn(loadSyrveysStub, 'load')
-        const sut = new LoadSurveysController(loadSyrveysStub)
+        const { sut, loadSurveysStub } = makeSut()
+        const loadSpy = jest.spyOn(loadSurveysStub, 'load')
         await sut.handle({})
-       expect(loadSpy).toHaveBeenCalled()
+        expect(loadSpy).toHaveBeenCalled()
+    })
+
+    it('should  return 200 on success', async () => {
+        const { sut, loadSurveysStub } = makeSut()
+        const httpResponse = await sut.handle({})
+        expect(httpResponse).toEqual(ok(makeFakeSurveys()))
     })
 })  
