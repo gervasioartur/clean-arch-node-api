@@ -1,5 +1,3 @@
-[![Build Status](https://app.travis-ci.com/gervasioartur/CURSO_TS_TDD_SOLID.svg?branch=master)](https://app.travis-ci.com/gervasioartur/CURSO_TS_TDD_SOLID)
-
 [![Coverage Status](https://coveralls.io/repos/github/gervasioartur/CURSO_TS_TDD_SOLID/badge.svg?branch=master)](https://coveralls.io/github/gervasioartur/CURSO_TS_TDD_SOLID?branch=master)
 # **Clean Node API**
 Essa API faz parte do treinamento do professor Rodrigo Manguinho (Mango) na Udemy.
