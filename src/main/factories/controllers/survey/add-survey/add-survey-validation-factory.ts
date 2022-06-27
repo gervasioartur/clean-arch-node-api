@@ -1,5 +1,4 @@
-import { Validation } from '../../../../../presentation/protocols/validation';
-import { ValidationComposite, RequedFieldValidation } from '../../../../../validation/validators';
+import { Validation, ValidationComposite, RequedFieldValidation } from './add-survey-controller-factory-protocols'
 
 export const makeAddSorveyValidation = (): ValidationComposite => {
     const validations: Validation[] = []

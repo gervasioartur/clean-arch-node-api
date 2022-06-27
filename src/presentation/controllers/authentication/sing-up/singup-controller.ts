@@ -1,10 +1,4 @@
-import { badRequest, serverError, forbidden, ok } from '../../../helpers/http/http-helper'
-import { EmailInUseError } from '../../../errors/index'
-import { Controller, HttpRequest, HttpResponse, Validation } from '../../../protocols'
-import { AddAccountModel,AddAccount } from '../../../../domain/useCases/add-account'
-import { LoadAccountById } from '../../../../domain/useCases/load-account-by-id'
-import { Authentication } from '../../../../domain/useCases/authentication'
-import { AccountModel } from '../../../../domain/models/Account'
+import { HttpRequest, HttpResponse, AddAccount , Validation, Authentication, badRequest, Controller, serverError, ok, forbidden, EmailInUseError } from './singup-controller-protoccols'
 
 export class SingUpController implements Controller {
     constructor (

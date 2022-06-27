@@ -1,7 +1,4 @@
-import { LoadSurveysController } from './load-surveys-controller'
-import { SurveyModel } from '../../../../domain/models/survey'
-import { LoadSurveys } from '../../../../domain/useCases/load-survey'
-import { noContent, ok , serverError } from '../../../helpers/http/http-helper'
+import { SurveyModel, LoadSurveysController, LoadSurveys, noContent, serverError, ok } from './load-surveys-controller-protocols'
 import Mockdate from 'mockdate'
 
 const makeFakeSurveys = (): SurveyModel[] => {
@@ -40,13 +37,13 @@ const makeSut = (): SutTypes => {
 }
 
 describe('', () => {
-    // beforeAll(() => {
-    //     Mockdate.set(new Date())
-    // })
+    beforeAll(() => {
+        Mockdate.set(new Date())
+    })
 
-    // beforeAll(() => {
-    //     Mockdate.reset()
-    // })
+    beforeAll(() => {
+        Mockdate.reset()
+    })
 
     it('should  call load surveys', async () => {
         const { sut, loadSurveysStub } = makeSut()
