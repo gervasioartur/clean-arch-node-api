@@ -43,8 +43,8 @@ describe('DbLoadSurveys', () => {
     beforeAll(() => {
         Mockdate.set(new Date())
     })
-
-    beforeAll(() => {
+    
+    afterAll(() => {
         Mockdate.reset()
     })
 
