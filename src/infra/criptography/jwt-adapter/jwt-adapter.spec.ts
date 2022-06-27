@@ -1,4 +1,3 @@
-import { verify } from "crypto"
 import jwt from "jsonwebtoken"
 import { JwtAdapter } from "./jwt-adapter"
 

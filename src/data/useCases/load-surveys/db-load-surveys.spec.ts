@@ -1,6 +1,7 @@
-import { SurveyModel } from "@/domain/models/survey"
-import { LoadSurveysRepository } from '@/data/protocols/db/survey/load-survey-repository'
-import { DbLoadSurveys } from './db-load-survey'
+import { DbLoadSurveys } from './db-load-surveys'
+import { LoadSurveysRepository } from "@/data/protocols/db/survey/load-survey-repository";
+import { SurveyModel } from "@/domain/models/survey";
+
 import Mockdate from 'mockdate'
 
 const makeFakeSurveys = (): SurveyModel[] => {
@@ -56,7 +57,7 @@ describe('DbLoadSurveys', () => {
 
     it('should return a List of survesy on success ', async () => {
         const { sut, loadSurveysRepositoryStub } = makeSut()
-       const surveys = await sut.load()
+        const surveys = await sut.load()
         expect(surveys).toEqual(makeFakeSurveys())
     })
 
