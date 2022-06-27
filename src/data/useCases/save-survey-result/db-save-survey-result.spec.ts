@@ -4,7 +4,7 @@ import { SaveSurveyResult, SaveSurveyResultModel } from '@/domain/useCases/save-
 import { SurveyResultModel } from '@/domain/models/survey-result'
 import { SaveSurveyResultRepository } from '@/data/protocols/db/survey/save-survey-result-repository'
 
-const makeFakeSurveyResult = (): SurveyResultModel => (
+const makeFakeSurveyResultData = (): SurveyResultModel => (
     {
         id: 'any_id',
         accountId: 'any_account_id',
@@ -18,7 +18,7 @@ const makeFakeSurveyResult = (): SurveyResultModel => (
 const makeSaveSurveyResultRepository = (): SaveSurveyResultRepository => {
     class SaveSurveyResultRepositoryStub implements SaveSurveyResultRepository {
         async save (data: SaveSurveyResultModel): Promise<SurveyResultModel> {
-            return new Promise(resolve => resolve(makeFakeSurveyResult()))
+            return new Promise(resolve => resolve(makeFakeSurveyResultData()))
         }
     }
     return new SaveSurveyResultRepositoryStub()
@@ -50,15 +50,21 @@ describe('DbSaveSurveyResult UseCase', () => {
     it('should call SaveSurveyResultRepository with correct values', async () => {
         const { sut, saveSurveyResultRepositoryStub } = makeSut()
         const saveSpy = jest.spyOn(saveSurveyResultRepositoryStub, 'save')
-        const surveyResult = makeFakeSurveyResult()
+        const surveyResult = makeFakeSurveyResultData()
         await sut.save(surveyResult)
         expect(saveSpy).toHaveBeenCalledWith(surveyResult)
+    })
+
+    it('should return a survesyResult on success ', async () => {
+        const { sut, saveSurveyResultRepositoryStub } = makeSut()
+        const surveyResult = await sut.save(makeFakeSurveyResultData())
+        expect(surveyResult).toEqual(makeFakeSurveyResultData())
     })
 
     it('should throw if SaveSurveyResultRepository throws', async () => {
         const { sut, saveSurveyResultRepositoryStub } = makeSut()
         jest.spyOn(saveSurveyResultRepositoryStub, 'save').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
-        const promise = sut.save(makeFakeSurveyResult())
+        const promise = sut.save(makeFakeSurveyResultData())
         await expect(promise).rejects.toThrow()
     })
 })
