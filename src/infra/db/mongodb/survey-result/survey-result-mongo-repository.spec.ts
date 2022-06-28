@@ -53,8 +53,7 @@ const makeAccount = async (): Promise<ObjectId> => {
 }
 
 const makeSut = (): SurveyResultMongoRepository => {
-    const surveyMongRepositoryStub = makeSurveyMongoRepository()
-    return new SurveyResultMongoRepository(surveyMongRepositoryStub)
+    return new SurveyResultMongoRepository()
 }
 
 describe('Survey Mongo repo', () => {
