@@ -10,7 +10,7 @@ const makeFakeSurveyResultData = (): SurveyResultModel => (
         accountId: 'any_account_id',
         surveyId: 'any_survey_id',
         question: 'any_question',
-        answers: 'any_answer',
+        answer: 'any_answer',
         date: new Date()
     }
 )
