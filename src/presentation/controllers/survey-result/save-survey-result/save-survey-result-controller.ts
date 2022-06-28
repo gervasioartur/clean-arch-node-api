@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb"
 import { Controller, HttpRequest, HttpResponse, LoadSurveyById, SaveSurveyResult , forbidden, InvalidParamError, serverError, ok } from "./save-survey-result-controller.protocols"
 
 export class SaveSurveyResultController implements Controller {
@@ -9,7 +10,7 @@ export class SaveSurveyResultController implements Controller {
         try {
             const { surveyId } = httpRequest.params
             const accountId = httpRequest.accountId
-            const { answer, question } = httpRequest.body
+            const { answer } = httpRequest.body
             const surveyById = await this.loadSurveyById.loadById(surveyId)
             if (surveyById) {
                 const answers = surveyById.answers.map(a => a.answer)
