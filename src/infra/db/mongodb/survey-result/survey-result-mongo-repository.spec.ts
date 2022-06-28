@@ -59,7 +59,7 @@ const makeSut = (): SurveyResultMongoRepository => {
 
 describe('Survey Mongo repo', () => {
     beforeAll(async () => {
-        await MongoHelper.connect(process.env.MONGO_URL || '')
+        await MongoHelper.connect(process.env.MONGO_URL)
     })
 
     afterAll(async () => {
