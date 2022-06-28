@@ -29,7 +29,7 @@ export class AccountMongoRepository implements AddAccountRepository, LoadAccount
     async loadById (id: any): Promise<AccountModel> {
         const accountColleaction = await MongoHelper.getCollection('accounts')
         const account = await accountColleaction.findOne({ _id: id })
-        return account ? MongoHelper.map(account) : null
+        return account && MongoHelper.map(account)
     }
 
     async updateAccessToken (id: any, token: string): Promise<void> {

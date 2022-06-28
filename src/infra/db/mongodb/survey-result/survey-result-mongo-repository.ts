@@ -22,7 +22,8 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
             }
         )
         result = MongoHelper.map(result)
-        const surveyResult = await surveyresultColleaction.findOne({ _id: result.lastErrorObject.upserted })
-        return surveyResult ? MongoHelper.map(surveyResult) : null
+        const insertedSurveyResultId = result.lastErrorObject.upserted
+        const surveyResult = await surveyresultColleaction.findOne({ _id: insertedSurveyResultId })
+        return surveyResult && MongoHelper.map(surveyResult) 
     }
 }
