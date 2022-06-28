@@ -13,8 +13,8 @@ export class SingUpController implements Controller {
             if (error) {
                 return badRequest(error)
             }
-            const { name, email, password } = httpRequest.body
-            const account = await this.addAccount.add({ name,email, password })
+            const { name, email, password, role } = httpRequest.body
+            const account = await this.addAccount.add({ name,email, password, role })
             if (!account) {
                 return forbidden(new EmailInUseError())
             }
