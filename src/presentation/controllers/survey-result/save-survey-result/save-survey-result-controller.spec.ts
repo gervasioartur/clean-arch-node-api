@@ -1,5 +1,5 @@
 import { SaveSurveyResultController } from "./save-survey-result-controller"
-import { HttpRequest, LoadSurveyById, SurveyModel, forbidden, InvalidParamError, serverError, SaveSurveyResult, MongoHelper } from "./save-survey-result-controller.protocols"
+import { HttpRequest, LoadSurveyById, SurveyModel, forbidden, InvalidParamError, serverError, SaveSurveyResult,ok } from "./save-survey-result-controller.protocols"
 import Mockdate from 'mockdate'
 import { SurveyResultModel } from "@/domain/models/survey-result"
 import { SaveSurveyResultModel } from "@/domain/useCases/survey-result/save-survey-result"
@@ -122,10 +122,16 @@ describe('SaveSurveyResultController', () => {
 
     it('Should return 500 if SaveSurveyResult throws', async () => {
         const { sut, saveSurveyResultStub } = makeSut()
-        const addSpy = jest.spyOn(saveSurveyResultStub, 'save').mockImplementationOnce(async () => {
+        jest.spyOn(saveSurveyResultStub, 'save').mockImplementationOnce(async () => {
             return new Promise((resolve, reject) => reject(new Error()))
         })
-        const httpResponse = await sut.handle({})
+        const httpResponse = await sut.handle(makeFakeRequest())
         expect(httpResponse).toEqual(serverError(new Error()))
+    })
+
+    it('Should return 200 on success', async () => {
+        const { sut, saveSurveyResultStub } = makeSut()
+        const httpResponse = await sut.handle(makeFakeRequest())
+        expect(httpResponse).toEqual(ok(makeFakeSurveyResultModel()))
     })
 })
