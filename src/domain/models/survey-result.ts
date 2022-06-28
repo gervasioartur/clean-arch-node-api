@@ -8,6 +8,6 @@ export interface SurveyResultModel {
     surveyId: string
     accountId: string
     question: string
-    answers: string
+    answer: string
     date: Date
 }

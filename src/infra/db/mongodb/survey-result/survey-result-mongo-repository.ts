@@ -16,14 +16,14 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
                 accountId: data.accountId
             },
             {
-                $set: { answer: data.answers }
+                $set: { answer: data.answer }
             },{
                 upsert: true
             }
         )
         result = MongoHelper.map(result)
-        const insertedSurveyResultId = result.lastErrorObject.upserted
-        const surveyResult = await surveyresultColleaction.findOne({ _id: insertedSurveyResultId })
+        const insertedOrUpdatedSurveyResultId = result.lastErrorObject.upserted || result.value._id
+        const surveyResult = await surveyresultColleaction.findOne({ _id: insertedOrUpdatedSurveyResultId })
         return surveyResult && MongoHelper.map(surveyResult) 
     }
 }
