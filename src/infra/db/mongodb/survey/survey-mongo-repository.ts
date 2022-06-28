@@ -1,4 +1,4 @@
-import { LoadSurveyById } from '@/domain/useCases/load-surveys-by-id'
+import { LoadSurveyById } from '@/domain/useCases/survey/load-surveys-by-id'
 import { MongoHelper, AddSurveyRepository, AddSurveyModel, LoadSurveysRepository, SurveyModel } from './survey-mong-repository-protocols'
 
 export class SurveyMongoRepository implements AddSurveyRepository, LoadSurveysRepository, LoadSurveyById {

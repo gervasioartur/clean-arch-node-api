@@ -1,4 +1,4 @@
-import { LoadAccountById } from "@/domain/useCases/load-account-by-id"
+import { LoadAccountById } from "@/domain/useCases/account/load-account-by-id"
 import { LoadAccountByIdRepository } from "@/data/protocols/db/account/load-account-by-id-repository"
 import { AccountModel } from "@/domain/models/Account"
 

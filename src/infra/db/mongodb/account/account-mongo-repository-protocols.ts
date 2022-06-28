@@ -1,6 +1,6 @@
 export * from "@/data/protocols/db/account/add-account-repository";
 export * from "@/domain/models/Account";
-export * from "@/domain/useCases/add-account";
+export * from "@/domain/useCases/account/add-account";
 export * from "../helpers/mongo-helper";
 export * from "@/data/protocols/db/account/load-account-by-email-repository";
 export * from "@/data/protocols/db/account/load-account-by-token-repository";

@@ -1,6 +1,6 @@
 import { LoadAccountByEmailRepository } from '@/data/protocols/db/account/load-account-by-email-repository'
 import { UpdateAccessTokenRepository } from '@/data/protocols/db/account/update-access-token-repository'
-import { Authentication, AuthenticationModel } from '@/domain/useCases/authentication'
+import { Authentication, AuthenticationModel } from '@/domain/useCases/authentication/authentication'
 import { HashComparer } from '@/data/protocols/criptography/hash-compare';
 import { Encrypter } from '@/data/protocols/criptography/encrypter';
 
