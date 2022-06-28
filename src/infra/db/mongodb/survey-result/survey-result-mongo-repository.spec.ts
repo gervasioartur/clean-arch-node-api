@@ -33,6 +33,16 @@ const makeSurvey = async (): Promise<ObjectId> => {
     return res.insertedId
 }
 
+const makeSurveyResult = async (accountId, surveyId, answer): Promise<void> => {
+    const res = await surveyResultColletion.insertOne(
+        {
+            surveyId: surveyId,
+            accountId: accountId,
+            answer
+        }
+    )
+}
+
 const makeAccount = async (): Promise<ObjectId> => {
     const res = await accountColletion.insertOne({
         name: 'any_name',
@@ -79,10 +89,30 @@ describe('Survey Mongo repo', () => {
             const sutAccountMongoRepository = makeAccountMongoRepository()
             const accountById = await sutAccountMongoRepository.loadById(accountId)
 
-            const surveyResult = await sut.save({ surveyId: surveyById.id, accountId: accountById.id, question: surveyById.question, answers: surveyById.answers[0].answer, date: new Date() })
+            const surveyResult = await sut.save({ surveyId: surveyById.id, accountId: accountById.id, question: surveyById.question, answer: surveyById.answers[0].answer, date: new Date() })
             expect(surveyResult).toBeTruthy()
             expect(surveyResult.accountId).toEqual(accountId)
             expect(surveyResult.surveyId).toEqual(surveyId)
+        })
+
+        it('should update survey if exists', async () => {
+            const sut = await makeSut()
+            const surveyId = await makeSurvey()
+            const accountId = await makeAccount()
+
+            const sutSurveyMongoRepository = makeSurveyMongoRepository()
+            const surveyById = await sutSurveyMongoRepository.loadById(surveyId)
+
+            const sutAccountMongoRepository = makeAccountMongoRepository()
+            const accountById = await sutAccountMongoRepository.loadById(accountId)
+
+            await makeSurveyResult(accountId, surveyId, surveyById.answers[0].answer)
+            const surveyResult = await sut.save({ surveyId: surveyById.id, accountId: accountById.id, question: surveyById.question, answer: 'updated_answer', date: new Date() })
+            
+            expect(surveyResult).toBeTruthy()
+            expect(surveyResult.accountId).toEqual(accountId)
+            expect(surveyResult.surveyId).toEqual(surveyId)
+            expect(surveyResult.answer).toEqual('updated_answer')
         })
     })
 })
