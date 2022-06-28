@@ -5,7 +5,7 @@ export interface SurveyAnswer {
     answer: string
 }
 
-export interface AddSurveyModel {
+export interface AddSurveyParams {
     question: string
     answers: SurveyAnswer[]
     date: Date

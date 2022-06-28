@@ -2,7 +2,7 @@ import { SaveSurveyResultController } from "./save-survey-result-controller"
 import { HttpRequest, LoadSurveyById, SurveyModel, forbidden, InvalidParamError, serverError, SaveSurveyResult,ok } from "./save-survey-result-controller.protocols"
 import Mockdate from 'mockdate'
 import { SurveyResultModel } from "@/domain/models/survey-result"
-import { SaveSurveyResultModel } from "@/domain/useCases/survey-result/save-survey-result"
+import { SaveSurveyResultParams } from "@/domain/useCases/survey-result/save-survey-result"
 import { Collection, ObjectId } from "mongodb"
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -43,7 +43,7 @@ const makeLoadSurveyById = (): LoadSurveyById => {
 
 const makeSaveSurveyResult = (): SaveSurveyResult => {
     class SaveSurveyResultStub implements SaveSurveyResult {
-        async save (data: SaveSurveyResultModel): Promise<SurveyResultModel> {
+        async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
             return new Promise(resolve => resolve(makeFakeSurveyResultModel()))
         }
     }

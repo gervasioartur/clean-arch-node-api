@@ -1,4 +1,4 @@
-import { HttpRequest, AddAccount, AddAccountModel, Validation, AccountModel, Authentication, AuthenticationModel, SingUpController, badRequest, MissingParamError, serverError, ok, ServerError } from './singup-controller-protoccols'
+import { HttpRequest, AddAccount, AddAccountParams, Validation, AccountModel, Authentication, AuthenticationParams, SingUpController, badRequest, MissingParamError, serverError, ok, ServerError } from './singup-controller-protoccols'
 
 const makeFakeRequest = (): HttpRequest => ({
     body: {
@@ -11,7 +11,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeaddAccount = (): AddAccount => {
     class AddAccountStub implements AddAccount {
-        async add (account: AddAccountModel): Promise<AccountModel> {
+        async add (account: AddAccountParams): Promise<AccountModel> {
             return new Promise(resolve => resolve(makefakeAccount()))
         }
     }
@@ -29,7 +29,7 @@ const makeValidation = (): Validation => {
 
 const makeAuthentication = (): Authentication => {
     class AuthenticatioStub implements Authentication {
-        async auth (Authentication: AuthenticationModel): Promise<string> {
+        async auth (Authentication: AuthenticationParams): Promise<string> {
             return new Promise(resolve => resolve('any_token'))
         }
     }
