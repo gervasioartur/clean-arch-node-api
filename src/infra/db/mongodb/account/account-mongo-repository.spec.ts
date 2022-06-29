@@ -3,6 +3,7 @@ import {
     MongoHelper , 
     AccountMongoRepository
 } from './account-mongo-repository-protocols'
+import { mockAddAccountParams } from '@/domain/__test__/mock-account'
 
 describe('Account Mongo repo', () => {
     let accountsColletion: Collection
@@ -26,11 +27,7 @@ describe('Account Mongo repo', () => {
     describe('add()', () => {
         it('Shoul return an account id on add success', async () => {
             const sut = makeSut()
-            const accountId = await sut.add({
-                name: 'any_name',
-                email: 'any_email@email.com',
-                password: 'any_password'
-            })
+            const accountId = await sut.add(mockAddAccountParams())
             expect(accountId).toBeTruthy()
         })
     })
@@ -38,11 +35,7 @@ describe('Account Mongo repo', () => {
     describe('loadByEmail()', () => {
         it('Shoud return an account on loadByEmail success', async () => {
             const sut = makeSut()
-            await accountsColletion.insertOne({
-                name: 'any_name',
-                email: 'any_email@email.com',
-                password: 'any_password'
-            })
+            await accountsColletion.insertOne(mockAddAccountParams())
             const account = await sut.loadByEmail('any_email@email.com')
 
             expect(account).toBeTruthy()
@@ -132,11 +125,7 @@ describe('Account Mongo repo', () => {
     describe('loadById()', () => {
         it('Shoud return an account on loadById success', async () => {
             const sut = makeSut()
-            const accountId = await accountsColletion.insertOne({
-                name: 'any_name',
-                email: 'any_email@email.com',
-                password: 'any_password'
-            })
+            const accountId = await accountsColletion.insertOne(mockAddAccountParams())
 
             const account = await sut.loadById(accountId.insertedId)
             expect(account).toBeTruthy()
@@ -156,11 +145,7 @@ describe('Account Mongo repo', () => {
     describe('updateAccessToken()', () => {
         it('Should update the account accessToken  on updateAccesToken success', async () => {
             const sut = makeSut()
-            const accoutId = await accountsColletion.insertOne({
-                name: 'any_name',
-                email: 'any_email@email.com',
-                password: 'any_password'
-            })
+            const accoutId = await accountsColletion.insertOne(mockAddAccountParams())
             await sut.updateAccessToken(accoutId.insertedId, 'any_token')
             const account = await accountsColletion.findOne({ _id: accoutId.insertedId })
             expect(account).toBeTruthy()

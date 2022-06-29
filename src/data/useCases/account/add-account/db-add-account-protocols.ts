@@ -1,4 +1,5 @@
-export * from '@/domain/test/'
+export * from '@/data/__test__'
+export * from '@/domain/__test__'
 export * from '@/domain/models/Account'
 export * from '@/data/protocols/criptography/hasher'
 export * from '@/domain/useCases/account/add-account'

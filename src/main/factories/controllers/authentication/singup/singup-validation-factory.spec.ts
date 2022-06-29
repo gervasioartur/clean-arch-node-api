@@ -1,7 +1,7 @@
 import { 
     Validation, 
-    EmailValidator, 
     EmailValidation, 
+    mockEmailValidator,
     ValidationComposite, 
     makeSinupValidation, 
     RequedFieldValidation, 
@@ -9,15 +9,6 @@ import {
 } from './singup-controler-factory-protocols'
 
 jest.mock('@/validation/validators/validation-composite')
-
-const makeEmailValidator = (): EmailValidator => {
-    class EmailValidatorStub implements EmailValidator {
-        isValid (email: string): boolean {
-            return true
-        }
-    }
-    return new EmailValidatorStub()
-}
 
 describe('SingupValidator', () => {
     it('should call ValidationCompositor with all validations', () => {
@@ -28,7 +19,7 @@ describe('SingupValidator', () => {
             )
         }
         validations.push(new CompareFiedsValidation('password','passwordConfirmation'))
-        validations.push(new EmailValidation('email', makeEmailValidator()))
+        validations.push(new EmailValidation('email', mockEmailValidator()))
         expect(ValidationComposite).toHaveBeenCalledWith(validations)
     })
 })

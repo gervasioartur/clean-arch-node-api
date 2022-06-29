@@ -1,4 +1,5 @@
 export * from "@/validation/validators"
+export * from "@/validation/__test__/"
 export * from '@/presentation/protocols';
 export * from "./singup-validation-factory"
 export * from "@/validation/protocols/email-validator"

@@ -1,3 +1,4 @@
+export * from '@/validation/__test__'
 export * from "@/validation/validators"
 export * from "@/presentation/protocols"
 export * from './login-validation-factory'
