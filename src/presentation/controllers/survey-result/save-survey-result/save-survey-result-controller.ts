@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb"
 import { Controller, HttpRequest, HttpResponse, LoadSurveyById, SaveSurveyResult , forbidden, InvalidParamError, serverError, ok } from "./save-survey-result-controller.protocols"
 
 export class SaveSurveyResultController implements Controller {
