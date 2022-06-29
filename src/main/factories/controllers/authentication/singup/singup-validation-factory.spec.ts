@@ -1,4 +1,12 @@
-import { EmailValidator, makeSinupValidation, RequedFieldValidation, Validation, CompareFiedsValidation, EmailValidation, ValidationComposite } from './singup-controler-factory-protocols'
+import { 
+    Validation, 
+    EmailValidator, 
+    EmailValidation, 
+    ValidationComposite, 
+    makeSinupValidation, 
+    RequedFieldValidation, 
+    CompareFiedsValidation
+} from './singup-controler-factory-protocols'
 
 jest.mock('@/validation/validators/validation-composite')
 

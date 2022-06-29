@@ -1,5 +1,11 @@
-import { EmailValidatorAdapter, RequedFieldValidation, Validation, CompareFiedsValidation, EmailValidation, ValidationComposite } from './singup-controler-factory-protocols'
-
+import { 
+    Validation, 
+    EmailValidation, 
+    ValidationComposite, 
+    RequedFieldValidation, 
+    EmailValidatorAdapter,
+    CompareFiedsValidation
+} from './singup-controler-factory-protocols'
 export const makeSinupValidation = (): ValidationComposite => {
     const validations: Validation[] = []
     for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {

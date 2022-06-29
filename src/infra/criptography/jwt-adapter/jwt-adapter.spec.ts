@@ -1,6 +1,6 @@
-import { throwError } from "@/domain/test"
 import jwt from "jsonwebtoken"
 import { JwtAdapter } from "./jwt-adapter"
+import { throwError } from "./jwt-adapter-protocols"
 
 jest.mock('jsonwebtoken', () => ({
     async sign (): Promise<string> {

@@ -1,5 +1,6 @@
-import { MongoHelper, SurveyMongoRepository } from './survey-mong-repository-protocols'
 import { Collection } from 'mongodb'
+import { SurveyMongoRepository } from './survey-mongo-repository'
+import { MongoHelper } from './survey-mong-repository-protocols'
 
 const makeSut = (): SurveyMongoRepository => {
     return new SurveyMongoRepository()

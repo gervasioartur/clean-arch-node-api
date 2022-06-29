@@ -1,10 +1,10 @@
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import request from 'supertest'
-import { app } from '../config/app'
+import { app } from '@/main/config/app'
 import { Collection } from 'mongodb'
 import { hash } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
-import env from '../config/env'
+import env from '@/main/config/env'
 
 describe('Login routes', () => {
     let surveysColletion: Collection

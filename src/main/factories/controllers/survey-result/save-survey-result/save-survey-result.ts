@@ -1,4 +1,10 @@
-import { Controller, makeLogControllerDecorator, SaveSurveyResultController, makeDbLoadSurveyById,makeDbSaveSurveyResult } from './save-survey-result-protocls'
+import { 
+    Controller,
+    makeDbLoadSurveyById,
+    makeDbSaveSurveyResult, 
+    makeLogControllerDecorator, 
+    SaveSurveyResultController
+} from './save-survey-result-protocls'
 
 export const makeSaveSurveyResultController = (): Controller => {
     const controller = new SaveSurveyResultController(makeDbLoadSurveyById(),makeDbSaveSurveyResult())

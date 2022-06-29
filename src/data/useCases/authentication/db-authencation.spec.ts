@@ -1,10 +1,13 @@
-import { AccountModel } from '@/domain/models/Account'
-import { LoadAccountByEmailRepository } from '@/data/protocols/db/account/load-account-by-email-repository'
-import { UpdateAccessTokenRepository } from '@/data/protocols/db/account/update-access-token-repository'
-import { Authentication, AuthenticationParams } from '@/domain/useCases/authentication/authentication'
-import { HashComparer } from '@/data/protocols/criptography/hash-compare';
-import { Encrypter } from '@/data/protocols/criptography/encrypter';
-
+import { 
+    Encrypter, 
+    HashComparer, 
+    AccountModel,
+    Authentication, 
+    mockAccountModel,
+    AuthenticationParams,
+    LoadAccountByEmailRepository, 
+    UpdateAccessTokenRepository
+} from './db-authencation-protocols'
 export class DbAuthentication implements Authentication {
     constructor (
         private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository,
@@ -27,17 +30,10 @@ export class DbAuthentication implements Authentication {
     }
 }
 
-const makeFakeAccount = (): AccountModel => ({
-    id: 'any_id',
-    name: 'any_name',
-    email: 'any_email@email.com',
-    password: 'hashed_password'
-})
-
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
     class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
         async loadByEmail (email: string): Promise<AccountModel> {
-            return new Promise(resolve => resolve(makeFakeAccount()))
+            return new Promise(resolve => resolve(mockAccountModel()))
         }
     }
     return new LoadAccountByEmailRepositoryStub()
@@ -124,7 +120,7 @@ describe('DbAuthentication UseCase', () => {
         const { sut, hashComparerStub } = makeSut()
         const compareSpy = jest.spyOn(hashComparerStub, 'compare')
         await sut.auth(makeFakeAuth())
-        expect(compareSpy).toHaveBeenCalledWith('any_password', 'hashed_password')
+        expect(compareSpy).toHaveBeenCalledWith('any_password', 'any_password')
     }) 
 
     it('should throw if hashCompare throws',async () => { 

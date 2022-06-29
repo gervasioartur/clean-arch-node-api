@@ -1,11 +1,11 @@
-import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
-import request from 'supertest'
-import { app } from '../config/app'
-import { Collection } from 'mongodb'
 import { hash } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
-import env from '../config/env'
 import Mockdate from 'mockdate'
+import request from 'supertest'
+import { sign } from 'jsonwebtoken'
+import { Collection } from 'mongodb'
+import env from '@/main/config/env'
+import { app } from '@/main/config/app'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 
 describe('SaveSurvey routes', () => {
     let surveysColletion: Collection

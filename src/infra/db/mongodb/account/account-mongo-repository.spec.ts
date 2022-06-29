@@ -1,5 +1,8 @@
-import { MongoHelper, AccountMongoRepository } from './account-mongo-repository-protocols'
 import { Collection } from 'mongodb'
+import { 
+    MongoHelper , 
+    AccountMongoRepository
+} from './account-mongo-repository-protocols'
 
 describe('Account Mongo repo', () => {
     let accountsColletion: Collection

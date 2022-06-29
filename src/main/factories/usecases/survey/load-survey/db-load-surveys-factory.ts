@@ -1,7 +1,4 @@
-import { DbLoadSurveys } from '@/data/useCases/survey/load-surveys/db-load-surveys'
-import { SurveyMongoRepository } from '@/infra/db/mongodb/survey/survey-mongo-repository'
-import { LoadSurveys } from '@/domain/useCases/survey/load-surveys'
-
+import { LoadSurveys, SurveyMongoRepository, DbLoadSurveys } from './db-load-survey-factory-protocols'
 export const makeDbLoadSurvey = (): LoadSurveys => {
     const surveyMongoRepository = new SurveyMongoRepository()
     return new DbLoadSurveys(surveyMongoRepository)

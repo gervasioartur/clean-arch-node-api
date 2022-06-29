@@ -1,8 +1,6 @@
-import { AddSurvey, AddSurveyParams } from '@/domain/useCases/survey/add-survey'
-import { AddSurveyRepository } from '@/data/protocols/db/survey/add-survey-repository'
-import { DbAddSurvey } from './db-add-survey'
 import Mockdate from 'mockdate'
-import { throwError } from '@/domain/test'
+import { DbAddSurvey } from './db-add-survey'
+import { AddSurveyParams, AddSurveyRepository, AddSurvey, throwError } from './db-add-survey-protocols'
 
 const makeFakeSurveyData = (): AddSurveyParams => (
     {

@@ -1,4 +1,13 @@
-import { AccountModel, LoadAccountByEmailRepository, AddAccountRepository, UpdateAccessTokenRepository, LoadAccountByIdRepository, LoadAccountByTokenRepository, AddAccountParams, MongoHelper } from './account-mongo-repository-protocols'
+import { 
+    AccountModel, 
+    MongoHelper ,
+    AddAccountParams, 
+    AddAccountRepository, 
+    LoadAccountByIdRepository, 
+    UpdateAccessTokenRepository, 
+    LoadAccountByEmailRepository, 
+    LoadAccountByTokenRepository
+} from './account-mongo-repository-protocols'
 
 export class AccountMongoRepository implements AddAccountRepository, LoadAccountByEmailRepository, UpdateAccessTokenRepository, LoadAccountByIdRepository, LoadAccountByTokenRepository {
     async add (accountData: AddAccountParams): Promise<any> {

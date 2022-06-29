@@ -1,18 +1,10 @@
-import { LoadAccountByIdRepository } from "../../../protocols/db/account/load-account-by-id-repository"
-import { AccountModel } from "../../../../domain/models/Account"
 import { DbLoadAccountById } from "./load-account-by-id"
-
-const makefakeAccount = (): AccountModel => ({
-    id: 'valid_id',
-    name: 'valid_name',
-    email: 'valid_email',
-    password: 'hashed_password'
-})
+import { LoadAccountByIdRepository, AccountModel, mockAccountModel } from './db-load-accout-by-id-protocols'
 
 const makeLoadAccountByIdRepository = (): LoadAccountByIdRepository => {
     class LoadAccountByIdRepositoryStub implements LoadAccountByIdRepository {
         async loadById (accountId: any): Promise<AccountModel> {
-            return new Promise(resolve => resolve(makefakeAccount()))
+            return new Promise(resolve => resolve(mockAccountModel()))
         }
     }
     return new LoadAccountByIdRepositoryStub()
@@ -50,6 +42,6 @@ describe('DbLoadAccount UseCase', () => {
         const { sut } = makeSut()
         await sut.load('valid_id')
         const account = await sut.load('valid_id')
-        expect(account).toEqual(makefakeAccount())
+        expect(account).toEqual(mockAccountModel())
     })
 })

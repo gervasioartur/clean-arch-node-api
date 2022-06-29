@@ -1,4 +1,18 @@
-import { HttpRequest, AddAccount, AddAccountParams, Validation, AccountModel, Authentication, AuthenticationParams, SingUpController, badRequest, MissingParamError, serverError, ok, ServerError } from './singup-controller-protoccols'
+import { mockAccountModel } from '@/domain/test'
+import { 
+    HttpRequest, 
+    AddAccount, 
+    AddAccountParams, 
+    Validation, 
+    AccountModel, 
+    Authentication, 
+    AuthenticationParams, 
+    SingUpController, 
+    badRequest, 
+    MissingParamError, 
+    ok, 
+    ServerError 
+} from './singup-controller-protoccols'
 
 const makeFakeRequest = (): HttpRequest => ({
     body: {
@@ -12,7 +26,7 @@ const makeFakeRequest = (): HttpRequest => ({
 const makeaddAccount = (): AddAccount => {
     class AddAccountStub implements AddAccount {
         async add (account: AddAccountParams): Promise<AccountModel> {
-            return new Promise(resolve => resolve(makefakeAccount()))
+            return new Promise(resolve => resolve(mockAccountModel()))
         }
     }
     return new AddAccountStub()
@@ -41,13 +55,6 @@ interface SutTypes {
     validationStub: Validation
     authenticationStub: Authentication
 }
-
-const makefakeAccount = (): AccountModel => ({
-    id: 'valid_id',
-    name: 'valid_name',
-    email: 'valid_email@email.com',
-    password: 'valid_password'
-})
 
 const makeSut = (): SutTypes => {
     const addAccountStub = makeaddAccount()
